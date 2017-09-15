@@ -1,0 +1,247 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>聚点微淘运营管理系统</title>
+	<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/fenye.css">
+	
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+	<!--[if lte IE 8]>
+	<link href="css/ie8.css" rel="stylesheet" type="text/css"/>
+	<![endif]-->
+	<script type="text/javascript" src="./Public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./Public/js/modernizr.js"></script>
+	<!--[if IE]>
+	<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+	<style>
+	.no-margins{
+	font-size:30px;
+	}
+	</style>
+	
+</head>
+
+<body>
+<div class="superWrap clearfix">
+	<meta charset="utf-8">
+<script type="text/javascript" src="./Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="//at.alicdn.com/t/font_k96l2uj6h3oqd7vi.js"></script>
+<style type="text/css">
+    .icon {
+       width: 1.4em; height: 1.4em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+    }
+    .icon:active{
+    color:#FF6C60;
+    }
+     #sidebar::-webkit-scrollbar{
+     width:3px;
+        background-color:none;
+    }
+    #sidebar::-webkit-scrollbar-thumb{
+     background:#FF6C60;
+     border-radius:4px;
+    }
+</style>
+	<div class="super-side-menu">
+		<div id="sidebar"  class="nav-collapse " style="width:205px; position: fixed;overflow-y:scroll;background: #2a3542;">
+              <!-- sidebar menu start-->
+              
+              <div style="background:#3782c6;height:86px;position: fixed;top:0;">
+              	<img src="./Public/images/logo.png">
+              </div>
+              <ul class="sidebar-menu" style="margin-top:106px;">
+              
+			      <?php if(is_array($menus)): $i = 0; $__LIST__ = $menus;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><li class="sub-menu" id="parent<?php echo ($vo["id"]); ?>">
+				     	   <?php if($vo["ename"] == 'Index'): ?><a href="<?php echo ($vo["url"]); ?>" class="">
+		                          <svg class="icon" aria-hidden="true">
+									    <use xlink:href="#<?php echo ($vo["url"]); ?>"></use>
+									</svg>
+		                          <span><?php echo ($vo["name"]); ?> </span>
+		                      </a>	   
+		                       <?php else: ?> 
+				     	   
+	                      <a href="javascript:;" class="">
+	                          <svg class="icon" aria-hidden="true">
+								    <use xlink:href="#<?php echo ($vo["url"]); ?>"></use>
+								</svg>
+	                          <span><?php echo ($vo["name"]); ?> </span>
+	                          <span class="arrow"></span>
+	                      </a>	                  
+		                   <ul class="sub">          
+			                  <?php if(is_array($vo['sub'])): $i = 0; $__LIST__ = $vo['sub'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo2): $mod = ($i % 2 );++$i; $domain = strstr($vo2['url'],$curl); if($domain){ echo '<li class="active"><a href="'.$vo2['url'].'">'.$vo2['name'].'</a></li>'; echo '<script>$("#parent'.$vo2['parentid'].'").addClass("active");</script>'; }else { echo '<li><a href="'.$vo2['url'].'">'.$vo2['name'].' </a></li>'; } endforeach; endif; else: echo "" ;endif; ?>
+		                  </ul><?php endif; ?>
+	                   </li><?php endforeach; endif; else: echo "" ;endif; ?>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+	</div>
+	
+	<div class="superContent">
+		<div class="super-header super-header2">
+			<!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>公共头部</title>
+	<link rel="stylesheet" href="./Public/css/base.css">
+	<script type="text/javascript" src="./Public/js/jquery.min.js"></script>
+	<script type="text/javascript" src="./Public/js/main.js"></script>
+	<script type="text/javascript" src="//at.alicdn.com/t/font_k96l2uj6h3oqd7vi.js"></script>
+	<style type="text/css">
+	    .icon {
+	       width: 1.2em; height: 1.2em;
+	       vertical-align: -0.15em;
+	       fill: currentColor;
+	       overflow: hidden;
+	    }
+	    .super-header { position: relative; z-index: 9;}
+		.superCtab { position: relative; z-index: 2;}
+		.superWrap { position: relative; min-width: 1000px; overflow: hidden;}
+		.super-side-menu { width: 205px; background: #313541; height: 100%; position: absolute; top: 0; left: 0; z-index: 8;}
+		.super-content {/* margin-left: 205px;*/ background: #fff; position: relative; z-index: 6;}
+		.superContent {margin-left: 205px; background: #fff;}
+		.superCtabBot {}
+	    .super-header { height: 86px; border-bottom: 1px solid #e5e4ee;}
+.super-header h2 {display: block; float: left; font-weight: normal; font-size: 28px; color: #454545; margin-left: 2%; line-height: 86px;}
+.super-header .head-right { float: right; margin: 33px 19px 0 0;}
+.head-right i.ico-user { display: inline-block; width: 14px; height: 15px; background: url(../images/ico_fabu_other.png) no-repeat 0 -24px; font-size: 16px; margin-right: 9px; position: relative; top: 3px;}
+.userslideDown { display: inline-block; position: relative; height: 50px;}
+.userslideDown a { color: #454545;}
+.userslideDown a i.ico-tri { display: inline-block; width: 9px; height: 5px; background: url(../images/ico_fabu_other.png) no-repeat -2px 0; margin: 0 0 0 8px; position: relative; top: -3px;
+	-moz-transition:-moz-transform .4s ease-out;
+	transition:transform .4s ease-out;
+}
+
+.userslideDown a.tri i.ico-tri { 
+	-webkit-transform:rotate(180deg);
+	-moz-transform:rotate(180deg);
+	transform:rotate(180deg);
+}
+.slidedownBox { position: absolute; top: 36px; right: -12px; width: 84px; padding: 0 12px;
+	border-radius: 3px; 
+	-moz-border-radius: 3px; 
+	-webkit-border-radius: 3px;
+	
+	opacity: 0;
+  	visibility: hidden;
+  	-webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  	-moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;
+  	transition: opacity 0.3s 0s, visibility 0s 0.3s;
+}
+.slidedownBox ul { background: #fff; box-shadow: 0 0 10px #e7e6e6;}
+.slidedownBox.anmpopup {
+	opacity: 1;
+  	visibility: visible;
+  	-webkit-transition: opacity 0.3s 0s, visibility 0s 0s;
+  	-moz-transition: opacity 0.3s 0s, visibility 0s 0s;
+  	transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+.slidedownBox ul {
+	-webkit-transform: translateY(-20px);
+  	-moz-transform: translateY(-20px);
+  	-ms-transform: translateY(-20px);
+  	-o-transform: translateY(-20px);
+  	transform: translateY(-20px);
+  /* Force Hardware Acceleration in WebKit */
+  		-webkit-backface-visibility: hidden;
+  	-webkit-transition-property: -webkit-transform;
+  	-moz-transition-property: -moz-transform;
+  	transition-property: transform;
+  	-webkit-transition-duration: 0.3s;
+  	-moz-transition-duration: 0.3s;
+  	transition-duration: 0.3s;
+  }
+.slidedownBox.anmpopup ul {
+  
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-ms-transform: translateY(0);
+	-o-transform: translateY(0);
+	transform: translateY(0);
+}
+.slidedownBox ul li {  font-size: 14px; border-bottom: 1px solid #e4e4e4; height: 38px; line-height: 38px; margin: 0 12px;}
+.slidedownBox ul li:last-child { border-bottom: none;}
+.slidedownBox ul li a { color: #454545;}
+.slidedownBox ul li a:hover { color: #f23e47;}
+	</style>
+</head>
+
+<body>
+<div class="super-header clearfix" style="position: fixed;top:0;left: 205px;right: 0;z-index: 1002;background:#fff">
+	<h2>聚点微淘运营管理系统</h2>
+	<div class="head-right">
+		<svg class="icon" aria-hidden="true"><use xlink:href="#icon-user"></use></svg>当前用户：
+		<div class="userslideDown">
+			<a href="javascript:;" class="superUser"><?php echo ($_SESSION['realname']); ?><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiala"></use></svg></a>
+			<div class="slidedownBox" style="z-index:3; position:absolute; width:120px;">
+				<ul>
+					<li><a href="?s=Login/modify" target="_top">修改密码</a></li>
+					<li><a href="?s=Login/logoff" target="_top">退出</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<!--header-->
+
+
+</body></html>
+		</div>
+		
+		<div class="superCtab superCtabBot" style="background:#f1f2f7; overflow-x:hidden;">
+			<div class="row" style="padding:0; margin:0; margin-top:20px;">
+                    
+                </div>	   
+		</div>
+	</div>
+	
+</div>
+
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+$(window).resize();
+
+
+</script>
+<script src="./Public/js/common-scripts.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+
+<script>
+var myDate = new Date();
+var month= myDate.getMonth()+1;
+$(".month").text(month+"月");
+
+
+$(function(){
+	laydate.skin('molv');
+	laydate({
+		  elem: '#add_time',
+		  format: 'YYYY-MM', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		});
+	
+	
+	
+})
+
+
+
+</script>
+
+</body></html>

@@ -1,0 +1,183 @@
+<?php
+import('ORG.Util.Image');
+
+class IndexAction extends AuthAction{
+	
+    public function index(){
+		
+    	$token = $_SESSION['user_token'];
+    	$open_id= $_SESSION['open_id'];
+    	$user_arr = $_SESSION['wxuser'];
+    	
+    	echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
+    	echo '<meta name=”viewport” content=”width=device-width, initial-scale=1″ /><h1>在微信端才能看见我</h1>';
+    	echo '<h1 style="word-wrap:break-word">token:'.$token.'    <br/><br/></h1>';
+    	echo '<h1 style="word-wrap:break-word">nickname:'.$user_arr['nickname'].'<br/><br/></h1>';
+    	echo '<h1 style="word-wrap:break-word">openid:'.$open_id.'<br/><br/></h1>';
+    	  
+    	//$bigImgPath = './2.jpg';
+		//echo parent::getPosterQRCode($bigImgPath,1);
+		
+    	
+    	
+    	/**
+    	 * 发送模板消息
+    	 * @param array $data 消息结构
+    	 * ｛
+	    	 "touser":"OPENID",
+	    	 "template_id":"ngqIpbwh8bUfcSsECmogfXcV14J0tQlEpBO27izEYtY",
+	    	 "url":"http://weixin.qq.com/download",
+	    	 "topcolor":"#FF0000",
+		    	 "data":{
+			    	 "参数名1": {
+			    	 		"value":"参数",
+			    		 "color":"#173177"	 //参数颜色
+			    	 },
+			    	 	"Date":{
+			    	 	"value":"06月07日 19时24分",
+			    	 	"color":"#173177"
+			    	 },
+			    	 	"CardNumber":{
+			    	 	"value":"0426",
+			    	 	"color":"#173177"
+			    	 },
+			    	 	"Type":{
+			    	 	"value":"消费",
+			    	 	"color":"#173177"
+			    	 }
+		    	 }
+	    	 }
+	    	 * @return boolean|array
+    	 */
+    	
+    	
+    	//模板消息
+    	
+    	$touser = array();
+    	$touser['touser'] = $this->open_id;
+    	$touser['template_id'] = "jP8rHHAF_9BI-Q0C7cMOa65dyiXrykiXJVZoA31Vr40";
+    	$touser['url'] = "http://www.baidu.com";
+    	$touser['topcolor'] = "#111111";
+    	
+    	$data = array();
+    	
+    	$dataValue['value'] = "Hi，亲爱哒：       您在TCL官网购买的TCL电视已经发货啦，正快马加鞭向您飞奔而去。";
+    	$dataValue['color'] = "#111111";
+    	$data['first'] = $dataValue;
+    	
+    	$dataValue['value'] = "TCL电视";
+    	$dataValue['color'] = "#111111";
+    	$data['keyword1'] = $dataValue;
+    	
+    	$dataValue['value'] = "2015-06-08 12:30";
+    	$dataValue['color'] = "#111111";
+    	$data['keyword2'] = $dataValue;
+    	
+    	$dataValue['value'] = "顺丰";
+    	$dataValue['color'] = "#111111";
+    	$data['keyword3'] = $dataValue;    
+    	
+    	$dataValue['value'] = "980456952123";
+    	$dataValue['color'] = "#111111";
+    	$data['keyword4'] = $dataValue;
+    	
+    	
+    	$dataValue['value'] = "厦门珍珠湾软件园1期";
+    	$dataValue['color'] = "#111111";
+    	$data['keyword5'] = $dataValue;
+    	
+    	
+    	$touser['data'] = $data;
+    	//echo parent::getPosterQRCode($bigImgPath,1);
+    	
+    	$options = array(
+    			'token'=>C('token'),
+    			'encodingaeskey'=>C('encodingaeskey'),
+    			'appid'=>C('appid'),
+    			'appsecret'=>C('appsecret')
+    	);
+    	
+    	//$we_obj = new Wechat($options);
+    	
+    	$json = parent::sendMsgTemp($open_id,"http://www.baidu.com","标题","红包","2017-03-03","备注");
+    	//file_put_contents("test.txt", $open_id.' '.$json);
+    	
+    	//$json = $we_obj->sendTemplateMessage($touser);
+    	//file_put_contents("test.txt", var_export($json));
+    	
+    }
+    
+    /**
+     *  跳转商城
+     */
+    public function shop(){
+    	
+	    $default_url = "http://lkoftg.agent.yqjuejin.com/";
+    	$fans = M('fans')->where("openid='".$this->open_id."'")->find();
+    	if ($fans['proxystatus'] == 1){
+    		$daili = M('daili')->where("openid='".$this->open_id."'")->find();
+    		if($daili['http']){
+    			$this->http = $daili['http'];
+    		}else {
+    			$this->http = $default_url;
+    		}
+    		
+    	}else{
+    		$pfans = M('fans')->where('id = '.$fans['parentfansid'])->find();
+    		if ($pfans && $pfans['mall'] != ''){
+    			$this->http = $pfans['mall'];
+    		}else {
+    			$this->http = $default_url;
+    		}
+    	}
+    	$this->show();
+    	
+    }
+    
+    /**
+     *  推广海报
+     */
+    public function poster(){
+    	
+    	$fans = M('fans')->where("openid='".$this->open_id."'")->find();
+    	if ($fans['proxystatus'] == 1) {
+    		if($fans['posterurl']){
+    			$this->posterurl = $fans['posterurl'];
+    			$this->title = "推广海报";
+    			$this->display();
+    		}else {
+    			//$bigImgPath = './2.png';//海报图片
+    			$poster= M('haibao')->where("status = 0")->find();
+    			
+    			//file_put_contents("test.txt", $poster['adress']);
+    			if ($poster) {
+    				$bigImgPath = $poster['imageurl'];
+    				
+    				$posterurl = parent::getPosterQRCode($bigImgPath,$fans['id']);
+    				$this->title = "推广海报";
+    				$fansdata['id'] = $fans['id'];
+    				$fansdata['posterurl'] = $posterurl;
+    				M('fans')->save($fansdata);
+    				$this->posterurl = $posterurl;
+    				$this->display();
+    			}else {
+    				echo 'no poster bg';	
+    			}
+    		}
+    	}else {
+    		//您身份不是合伙人，无法生成海报。
+    		$this->redirect('Index/common');
+    	}
+    }
+    public function common(){
+    	$this->display();
+    }
+    public function testPay(){
+    	$result = parent::pay('o_2wg01haP8AQEQxtSNr8mFlW_ZA',1,'免单返款');
+    	if ($result->result_code =='FAIL'){
+    		file_put_contents("test.txt", $result->err_code_des);  
+    	}else {
+    		file_put_contents("test.txt", "成功");
+    	}
+    }
+}

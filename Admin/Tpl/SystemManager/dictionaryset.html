@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>聚点微淘运营管理系统</title>
+	<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/page.css">
+	<link rel="stylesheet" href="./Public/css/fenye.css" />
+	<include file="Public:common"/>
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+	
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="./Public/table/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+</head>
+
+<body style="background:#f1f2f7">
+<div class="superWrap clearfix">
+	<include file="Public:left"/>
+	<!--side E-->
+	<!--content S-->
+	<div class="superContent">
+	<div class="super-header super-header2">
+	<include file="Public:header"/>
+	</div>	
+		<!--header-->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+			<div class="col-lg-12" style="margin-top:20px;">
+		      <div class="ibox float-e-margins">
+		          <div class="ibox-title">
+		              <h5>用户基本信息表</h5>
+		          </div>
+		          <div class="ibox-content">
+		          <form action="" method="get">
+							<input type="hidden" name="s" value="SystemManager/dictionaryset">
+		          	  <div class="row">
+		          	  	<div class="col-sm-2 m-b-xs" >
+	                       <input placeholder="请输入字段名或值" class="form-control" type="text"  style=" height:36px;" name="fvalue" id="fvalue" value="{$_GET['fvalue']}">
+	                    </div>
+	                    
+	                    <div class="col-sm-5" style="padding-left:70px;">
+		                    <button type="submit" class="btn btn-sm btn-primary" style=" height:36px; width:5em">查询</button>
+		                    <a href="#myModal-1" data-toggle="modal" class="btn btn-sm btn-success" style=" height:36px; width:6em;line-height:24px;margin-left:10px;">添加字段 </a>
+		                 </div>
+		          	  </div>
+		          	  </form>
+		              <table class="table table-hover table-bordered" style="margin-top:20px;">
+		                  <thead>
+		                      <tr>
+		                      	  <th style="text-align:center;">编号</th>
+		                          <th style="text-align:center;">字段名</th>
+		                          <th style="text-align:center;">值</th>
+		                          <th style="text-align:center;">说明</th>
+		                          <th style="text-align:center;">操作</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  	<volist name="list" id="vo">
+		                      <tr>
+		                      		<td style="text-align:center;">{$vo.id}</td>
+		                          <td style="text-align:center;">{$vo.field}</td>
+		                          <td style="text-align:center;">{$vo.value}</td>
+		                          <td style="text-align:center;">{$vo.remark}</td>
+		                          <td style="text-align:center;">
+		                          <a href="#myModal-1" data-toggle="modal" mce_href="" onclick="edituser('{$vo.id}','{$vo.field}','{$vo.value}','{$vo.remark}')">编辑
+		                          <a href="javascript:void(0);" data-toggle="modal" mce_href="" onclick="deluser('{$vo.id}')">删除</a>
+		                          </td>
+		                      </tr>
+		                      </volist>
+		                  </tbody>
+		              </table>
+		              <div	class="fenye">
+				     	{$page}
+				     </div>
+		          </div>
+		      </div>
+		  </div>
+		</div>
+		<!--main-->
+		
+	</div>
+	<!--content E-->
+	
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:480px">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">添加新角色</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal">
+                	<input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">字段名</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="field"  name="field">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">值</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="value"  name="value">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">说明</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="remark"  name="remark">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-10">
+                            <button type="button" class="btn btn-success" id="submit-btn">提交</button>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+			
+        </div>
+    </div>
+</div>
+<!--时间插件-->
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+$(window).resize();
+
+laydate.skin('molv');
+
+
+
+</script>
+<script>
+$(document).ready(function(){
+	$("#laydate_box").css("box-sizing","content-box");
+	});
+
+function deluser(id){
+	if (!confirm("确认删除?")) {
+        return;
+    }
+	$.getJSON('?s=SystemManager/deldictionary',{'id':id},function(data){
+		//layer.msg(data['msg'],{time:12000});
+	 	if (data['msg'] == 1) {
+ 			layer.msg("删除成功",{time:1200},function(){
+				location.reload(true);
+			});
+ 		}else if (data['msg'] == 2) {
+ 			layer.msg('删除失败！',{time:1200});
+ 		}
+ 	});
+}
+function edituser(id,field,value,remark){
+	$("#id").val(id);
+	$("#field").val(field);
+	$("#value").val(value);
+	$("#remark").val(remark);
+	$("#field").attr("readonly","readonly"); 
+	$("#remark").attr("readonly","readonly"); 
+}
+$("#submit-btn").click(function(){
+	var id = $("#id").val();
+	var field=$("#field").val();
+	var value=$("#value").val();
+	var remark=$("#remark").val();
+	if(field != "" && value != "" && remark != ""){
+		$.ajax({
+			type:"post",
+			url:"?s=SystemManager/adddictionary",
+			data:{'id':id,'field':field,'value':value,'remark':remark},
+			dataType : "json",			
+			success : function(data){
+				if(data['msg'] == 1){
+					layer.msg('操作成功',{time:800},function(){
+						location.reload(true);
+					});
+				}else{
+					layer.msg('操作失败',{time:800});
+				}
+			}
+		});
+	}else{
+	 	//layer.msg('请填写相关数据',{time:800});
+	 	layer.msg('请填写相关数据',{time:800});
+	}
+});
+</script>
+
+</body></html>

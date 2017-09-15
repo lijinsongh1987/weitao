@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/login/login.js"></script>
+</head>
+<body>
+
+</body>
+</html>

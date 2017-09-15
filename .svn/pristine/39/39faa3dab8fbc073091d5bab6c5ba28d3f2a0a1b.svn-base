@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>新人红包</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+	#conten{
+		background: #fedd46;
+	}
+	.box{
+		padding: 15px;
+	}
+	.packs{
+		border:solid 2px #3b211c;
+		background: #fed42b;
+		border-radius: 10px;
+		padding: 10px;
+		padding-bottom: 15px;
+	}
+	.packs .text-img{
+		width:45%;
+		margin: 15px auto;
+		margin-top: 5px;
+	}
+	.packs-text-box{
+		background: #fff;
+		border-radius: 6px;
+		padding-bottom: 15px;
+	}
+	.packs-text-box .link{
+		width:80%;
+		display: block;
+		background: #fe7633;
+		line-height: 3em;
+		font-size: 16px;
+		text-align: center;
+		margin: 0 auto;
+		border-radius: 99px;
+		color: #fff;
+		font-weight: bold;
+	}
+	.persnoal-box{
+		display: -webkit-flex;
+		padding: 15px;
+	}
+	.persnoal-box .avatar{
+		width:48px;
+		height: 48px;
+		border-radius: 66px;
+		margin-right: 15px;
+	}
+	.persnoal-box .text-p-img{
+		width:5px;
+		height: 10px;
+		z-index: 9999;
+		margin-top: 20px;
+	}
+	.persnoal-box .text-content{
+		flex:1;
+		background: #f3f3f3;
+		border:1px solid #fed42b;
+		margin-left: -1px;
+		border-radius: 3px;
+		padding: 10px;
+		color: #3b211c;
+		font-size: 14px;
+		text-align: justify;
+	}
+	.text-content span{
+		color: #ff2424
+	}
+	.liucheng{
+		font-size: 16px;
+		text-align: justify;
+		line-height: 1.6em;
+		margin-top: 15px;
+	}
+</style>
+</head>
+
+<body>
+
+	
+	<section id="conten">
+		<img src="./Public/Home/img/invite-im.png">
+		<div class="box">
+			<div class="packs">
+				<img class="text-img" src="./Public/Home/img/invite-text.png">
+				<div class="packs-text-box">
+					<div class="persnoal-box">
+						<img class="avatar" src="{$imageurl}" id="imageurl">
+						<img class="text-p-img" src="./Public/Home/img/persnoal-text-img.png">
+						<p class="text-content">HI-我是<span id="nickname">{$nickname}</span><br>我在聚点微淘送你{$price}元新手红包，点击立即领取</p>
+					</div>
+					<a class="link" href="https://acbfbq.mlinks.cc/A0FV?openid={$openid}">立即领取</a>
+				</div>
+			</div>
+			<p class="liucheng">
+				领取流程：<br>1.点击立即领取，获得红包奖励<br>2.进入聚点微淘【APP-微信登录】<br>3.按照奖励规则领取对应福利
+			</p>
+		</div>
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+
+    
+</html>

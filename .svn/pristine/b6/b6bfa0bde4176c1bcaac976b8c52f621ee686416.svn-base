@@ -1,0 +1,17 @@
+<?php
+
+class PersnoalAction extends Action{
+    public function persnoal(){
+        $this->display();       
+    }
+   
+    public function withdraw(){
+        $this->display();
+    }
+    
+    public function message(){
+        $this->display();
+    }
+}
+
+?>

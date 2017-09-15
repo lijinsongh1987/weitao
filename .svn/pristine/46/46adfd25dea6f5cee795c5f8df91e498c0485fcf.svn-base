@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>聚点微淘运营管理系统</title>
+	<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/page.css">
+	<include file="Public:common"/>
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+	
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="./Public/table/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+</head>
+<body>
+<div class="superWrap clearfix" style="height: 781px;">
+	<include file="Public:left"/>
+	<div class="superContent">
+	<div class="super-header super-header2">
+	<include file="Public:header"/>
+	</div>	
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+			<div class="col-lg-12" style="margin-top:20px;">
+		      <div class="ibox float-e-margins">
+		          <div class="ibox-title">
+		              <h5>淘宝头条文章采集信息</h5>
+		          </div>
+		          <div class="ibox-content" id="content">
+		          </div>
+		      </div>
+		  </div>
+		</div>
+	</div>
+</div>
+<!--时间插件-->
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+$(window).resize();
+
+$(function(){
+	var content = '{$content}';
+	content = JSON.parse(content);
+	var str = document.getElementById("content");
+	var html = "";
+	var detailUrl = "";
+	var publishId = "";
+	var names = "";
+	var number = "{$number}";
+	var type = "{$type}";
+	var url = "";
+	var did = "";
+	var uname = "";
+	var piclist = "";
+	var pic = "";
+	for (var i = 0; i < content['data'].length ; i++) {
+		var urllist = content['data'][i]['detailUrl'].split("=");
+		if (i < content['data'].length - 1) {
+			detailUrl += urllist[1]+",";
+			names += content['data'][i]['name']+"&";
+			piclist += content['data'][i]['picList']+"&";
+		} else if (i == content['data'].length - 1) {
+			detailUrl += urllist[1];
+			publishId = content['data'][i]['publishId'];
+			names += content['data'][i]['name'];
+			piclist += content['data'][i]['picList']+"&";
+		}
+	}
+	var time = 0;
+	var count = 0;
+	var pagecount = 1;
+	for (var page = 0;page < number;page++) {
+		var datalast = "";
+		if (url == "" && did == "" && uname == ""){
+			datalast = {'detailUrl':detailUrl,'publishId':publishId,'number':number,'names':names,'type':type,'page':page,'piclist':piclist};
+		} else {
+			datalast = {'detailUrl':url,'publishId':did,'number':number,'names':uname,'type':type,'page':page,'piclist':pic};
+		}
+		$.ajax({
+			type:"get",
+			url:"?s=TaoBaoheader/caijiinfo",
+			data:datalast,
+			dataType : "json",	
+			async: false,
+			success : function(data){
+				var contentone = data['result'];
+				contentone = JSON.parse(contentone);
+				url = "";
+				did = "";
+				uname = "";
+				pic = "";
+				for (var i = 0; i < contentone['data'].length; i++) {
+					var urllist = contentone['data'][i]['detailUrl'].split("=");
+					if (i < contentone['data'].length - 1) {
+						url += urllist[1]+",";
+						uname += contentone['data'][i]['name']+"&";
+						pic += contentone['data'][i]['picList']+"&";
+					} else if (i == contentone['data'].length - 1) {
+						url += urllist[1];
+						did = contentone['data'][i]['publishId'];
+						uname += contentone['data'][i]['name'];
+						pic += contentone['data'][i]['picList'];
+					}
+					
+				}
+				var htmlother = "";
+				count = "{$_SESSION['count']}";
+				htmlother += "<div><h style='color:red;'>当前已采集完第"+pagecount+"页一共采集"+data['count']+"条数据</h></div>";
+				$("#content").empty();
+				$("#content").html(htmlother);	
+				pagecount++;
+			}
+		});
+	}
+});
+
+</script>
+<script>
+
+</script>
+
+</body></html>

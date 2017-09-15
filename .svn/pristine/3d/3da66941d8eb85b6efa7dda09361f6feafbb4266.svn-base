@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>优惠券</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+body{
+	background: #fff;
+	}
+#conten{
+	width:100%;
+	}
+#conten .goodsimg{
+	width:100%;
+}
+.title{
+display: -webkit-flex;
+font-size: 16px;
+color:#161616;
+line-height: 16px;
+padding:15px 15px 10px 15px;
+}
+.title img{
+height: 16px;
+width:16px;
+}
+.title span{
+flex:1;
+margin-left:10px;
+}
+.quan{
+display: -webkit-flex;
+justify-content:space-between;
+padding: 0 15px 10px 15px;
+font-size: 14px;
+color:#969696;
+}
+body .ano_bg {
+    background-color: #f54e54;
+}
+.end_box {
+    position: relative;
+    display: inline-block;
+    width: 45px;
+    height: 21px;
+    margin-right: 15px;
+    text-align: center;
+    line-height: 21px;
+    font-size: 12px;
+    color: #fff;
+    border-radius: 3px;
+}
+.end_box:before {
+    position: absolute;
+    right: -4px;
+    top: 6px;
+    content: '';
+    height: 0;
+    border-left: 4px solid #f54e54;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+}
+body .ano_color {
+    color: #f54e54;
+}
+.share_end{
+	padding-left: 15px;
+}
+.share_end_value {
+    display: inline-block;
+    vertical-align: middle;
+}
+.share_end_value span {
+    font-size: 24px;
+}
+footer{
+    width: 100%;
+    position: fixed;
+    bottom: 10px;
+}
+footer a{
+	display: block;
+	background-color: #f54e54;
+    margin: 0 10px;
+    line-height: 45px;
+    color: #fff;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+</style>
+</head>
+
+<body>
+		<section id="conten">
+			
+			<img class="goods-img" src="{$goodsimg}">
+			<h1 class="title">
+				<if condition="$IsTmall eq 1">
+					<img src="./Public/Home/img/tianmao.png">
+				</if>
+				<if condition="$IsTmall eq 0">
+					<img src="./Public/Home/img/taobao.png">
+				</if>
+				<span>{$D_title}</span>
+			</h1>
+			<div class="quan">
+				<p>在售价:￥{$Org_Price}</p>
+				<p>已有{$Quan_receive}人领券</p>
+			</div>
+			
+			<div class="share_end">
+				<span class="end_box ano_bg">券后价</span><p class="share_end_value ano_color">¥<span>{$Price}</span></p>
+			</div>
+			
+			
+			
+		</section>
+		
+		
+		<footer>
+			<!-- <a href="https://acbfbq.mlinks.cc/A0bS?goods_id=44111430213&activity_id=4024df20f80b4188a3a7955789b0e9fd">领{$Quan_price}元券购买</a> -->
+			<a style="text-decoration:none" href="https://acbfbq.mlinks.cc/A0bS?url={$url}">领{$Quan_price}元券购买</a>
+		</footer>
+</body>
+
+
+    
+</html>

@@ -1,0 +1,43 @@
+<?php
+
+class IndexAction extends Action{
+    public function index(){
+        $list = M("goods")->where("id is not null ".$and)->limit(20)->select();
+        //转换链接
+        $pid = "mm_30979406_3042389_10494070";
+        $pidlist = split("_",$pid);
+        //查询对应的tokenid
+        $tokenid = M("account")->where("member_id = '".$pidlist[1]."'")->find();
+        $url = "http://tbapi.00o.cn/highapi.php";
+        $linklist = array();
+        for($i = 0;$i < count($list);$i++) {
+        	$linklist =  split("&",$list[$i]['Quan_link']);
+        	$post_data = array ("item_id" => ".$list[$i]['GoodsID'].","adzone_id" => "10494070","platform"=>"1","site_id"=>"3042389","token"=>".$tokenid['access_token'].");
+        	$ch = curl_init();
+        	curl_setopt($ch, CURLOPT_URL, $url);
+        	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        	// post数据
+        	curl_setopt($ch, CURLOPT_POST, 1);
+        	// post的变量
+        	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        	$output = array();
+        	$output = curl_exec($ch);
+        	curl_close($ch);
+        	$output_array = json_decode($output,true);
+        	$list[$i]['gourllink'] = $output_array['result']['data']['coupon_click_url']."&".$linklist[1];
+        }
+        $this->list = $list;
+        $this->display();       
+    }
+    
+    public function datajson(){
+        $conter = $_GET['counter'];
+        $conter = $conter*20;
+        $data = M('goods')->limit(20,$conter)->select();
+        //$data['sql'] = M()->getLastSql();
+        echo json_encode($data);
+    }
+   
+}
+
+?>

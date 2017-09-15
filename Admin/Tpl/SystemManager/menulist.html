@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>聚点微淘运营管理系统</title>
+		<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/page.css">
+	<include file="Public:common"/>
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+	
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="./Public/table/bootstrap/3.3.4/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+<style>
+.table th, .table td { 
+text-align: center;
+vertical-align: middle!important;
+}
+	</style>
+	<body>
+<div class="superWrap clearfix" style="height: 781px;overflow:scroll;">
+	<include file="Public:left"/>
+	<!--side E-->
+	<!--content S-->
+	<div class="superContent">
+	<div class="super-header super-header2">
+	<include file="Public:header"/>
+	</div>
+	<div style="margin-left:20px;margin-top:20px;">
+	<div class="col-sm-1" style="margin:10px 0px 10px 0px;">
+        <a href="#myModal-1" onclick="clearmenu();" data-toggle="modal" class="btn btn-sm btn-success" style=" height:36px; width:6em;line-height:24px;margin-left:10px;">添加菜单</a>
+     </div>
+		<table id="tb_departments" style="text-align:center;"></table>
+		</div>
+</div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:480px">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">添加新菜单</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal">
+                	<input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <label for="inputEmail1" class="col-lg-3 control-label">菜单等级</label>
+                        <div class="col-lg-8">
+                            <select class="input-sm form-control input-s-sm inline" name="levelid" id="levelid" style=" height:36px;">
+	                            <option value="0">请选择菜单等级</option>
+	                            <option value="1">一级菜单</option>
+	                            <option value="2">二级菜单</option>
+	                        </select>
+                            <p id="name_info" class="text-danger" style="font-size:12px;"></p>
+                        </div>
+                        <span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">所属菜单</label>
+                        <div class="col-lg-8">
+                            <select class="input-sm form-control input-s-sm inline" name="parentid" id="parentid" style=" height:36px;">
+	                            <option value="0">请选择所属菜单</option>
+	                            <volist name="onelevel" id="vo">
+	                            <option value="{$vo.id}">{$vo.name}</option>
+	                            </volist>
+	                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">菜单名称</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="name"  name="name" placeholder="">
+                        </div>
+                        <span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">菜单Action名</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="ename"  name="ename" placeholder="注意大小写">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-10">
+                            <button type="button" class="btn btn-success" id="submit-btn">提交</button>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+			
+        </div>
+    </div>
+</div>
+		<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+		<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+		<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+		<script src="./Public/js/layer/layer.js"></script>
+		<script src="./Public/js/common-scripts.js"></script>
+		<script>
+		$('#levelid').change(function(){ 
+			var p1=$(this).children('option:selected').val();//这就是selected的值
+			//选中一级菜单 
+			if (p1 == 1) {
+				document.getElementById('parentid').disabled=true;
+			} else {
+				document.getElementById('parentid').disabled=false;
+			}
+		});
+		$("#submit-btn").click(function(){
+			var id = $("#id").val();
+			var levelid=$("#levelid").val();
+			var name=$("#name").val();
+			var ename=$("#ename").val();
+			var data = "";
+			if (levelid == 1) {
+				data = {'id':id,'levelid':levelid,'name':name,'ename':ename};
+			} else if (levelid == 2) {
+				var parentid=$("#parentid").val();
+				var url=$("#url").val();
+				data = {'id':id,'levelid':levelid,'name':name,'parentid':parentid,'ename':ename};
+			}
+			if(levelid != 0 && name != ""){
+				$.ajax({
+					type:"post",
+					url:"?s=SystemManager/addmenu",
+					data:data,
+					dataType : "json",			
+					success : function(data){
+						if(data['msg'] == 1){
+							layer.msg('操作成功',{time:800},function(){
+								location.reload(true);
+							});
+						}else if (data['msg'] == 0){
+							layer.msg('添加成功',{time:800});
+						}else if (data['msg'] == 2){
+							layer.msg('添加成功',{time:800});
+						}
+					}
+				});
+			}else{
+			 	//layer.msg('请填写相关数据',{time:800});
+			 	layer.msg('请填写相关数据',{time:800});
+			}
+		});
+		window.onresize = function(){
+			var winH=$(window).height();
+			var headH=$('.super-header').height();
+			$('.superWrap').height(winH);
+			$('.superContent').height(winH-headH);
+		};
+		$(window).resize();
+		$('#tb_departments').bootstrapTable({
+			url: '?s=SystemManager/getonelevel', //请求后台的URL（*）
+			method: 'get', //请求方式（*）
+			toolbar: '#toolbar', //工具按钮用哪个容器
+			striped: true, //是否显示行间隔色
+			cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+			sortable: true, //是否启用排序
+			sortOrder: "asc", //排序方式
+			//queryParams: oTableInit.queryParams, //传递参数（*）
+			clickToSelect: true,
+			detailView:true,
+			showExport: true, //是否显示导出
+			exportDataType: "basic", //basic', 'all', 'selected'.
+			columns: [{
+				field: 'id',
+				title: '菜单编号'
+			}, {
+				field: 'name',
+				title: '菜单名称',
+				sortable: true
+			}, {
+				field: 'level',
+				title: '菜单等级',
+				sortable: true
+			} , {
+				field: 'ename',
+				title: '菜单Action',
+				sortable: true
+			} , 
+               {
+                   title: '操作',
+                   field: 'id',
+                   align: 'center',
+                   formatter:function(value,row,index){  
+                   var e = '<a href="#myModal-1" data-toggle="modal" mce_href="" onclick="editmenu(\''+ row.id + '\',\''+row.name+'\',\''+row.ename+'\',\''+row.level+'\','+row.parentid+')">编辑</a> ';  
+                   var d = '<a href="#" mce_href="#" onclick="delmenu(\''+ row.id +'\')">删除</a> ';  
+                      return e+d;  
+                   } 
+               }],
+               onExpandRow: function (index, row, $detail) {
+				inittable(index, row, $detail);
+               }
+		});
+
+		function inittable(index, row, $detail){
+			var parentid = row.id;
+	        var cur_table = $detail.html('<table></table>').find('table');
+	        $(cur_table).bootstrapTable({
+	            url: '?s=SystemManager/gettwolevel',
+	            method: 'get',
+	            queryParams: { id: parentid },
+	            ajaxOptions: { id: parentid },
+	            clickToSelect: true,
+	            uniqueId: "id",
+	            pageSize: 10,
+	            pageList: [10, 25],
+	            columns: [{
+					field: 'id',
+					title: '菜单编号'
+				}, {
+					field: 'name',
+					title: '菜单名称',
+					sortable: true
+				}, {
+					field: 'level',
+					title: '菜单等级',
+					sortable: true
+				} , {
+					field: 'ename',
+					title: '菜单Action',
+					sortable: true
+				} ,
+                {
+                    title: '操作',
+                    field: 'id',
+                    align: 'center',
+                    formatter:function(value,row,index){  
+	                   var e = '<a href="#myModal-1" data-toggle="modal" mce_href="#" onclick="editmenu(\''+ row.id + '\',\''+row.name+'\',\''+row.ename+'\',\''+row.level+'\','+row.parentid+')">编辑</a> ';  
+	                   var d = '<a href="#" mce_href="#" onclick="delmenu(\''+ row.id +'\')">删除</a> ';  
+                       return e+d;  
+                    } 
+                }],
+	            
+	        });
+		}
+		function delmenu(id){
+			if (!confirm("删除资源信息会删除相应角色资源信息,确认删除?")) {
+	            return;
+	        }
+			$.getJSON('?s=SystemManager/delmenu',{'id':id},function(data){
+				//layer.msg(data['msg'],{time:12000});
+			 	if (data['msg'] == 1) {
+		 			layer.msg("删除成功",{time:1200},function(){
+						location.reload(true);
+					});
+		 		}else if (data['msg'] == 2) {
+		 			layer.msg('该菜单下还有其它子菜单，请先删除子菜单！',{time:1200});
+		 		}else if (data['msg'] == 4) {
+		 			layer.msg('删除失败！',{time:1200});
+		 		}
+		 	});
+		}
+
+		function editmenu(id,name,ename,level,parentid){
+			$("#id").val(id);
+			$("#name").val(name);
+			$("#ename").val(ename);
+			if (level == '一级菜单') {
+				$("#levelid").find("option[value='1']").attr("selected",true);
+			} else if (level == '二级菜单') {
+				$("#levelid").find("option[value='2']").attr("selected",true);
+			}
+			if (parentid != 0) {
+				$("#parentid").find("option[value='"+parentid+"']").attr("selected",true);
+			}
+		}
+		function clearmenu(){
+			$("#id").val("");
+			$("#levelid").find("option[value='0']").attr("selected",true);
+			$("#parentid").find("option[value='0']").attr("selected",true);
+			$("#name").val("");
+			$("#ename").val("");
+		}
+		</script>
+	</body>
+</html>

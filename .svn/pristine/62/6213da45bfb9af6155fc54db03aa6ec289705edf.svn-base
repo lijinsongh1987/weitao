@@ -1,0 +1,17 @@
+function dologin(nickname,imageurl,openid){
+	$.ajax({
+		type:"post",
+		url:"../index.php?s=Api/savetbuser",
+		data:{'nickname':nickname,'imageurl':imageurl,'openid':openid},
+		dataType : "json",			
+		success : function(data){
+			localStorage.setItem("nickname",nickname);
+     		localStorage.setItem("imageurl",imageurl);
+     		localStorage.setItem("openid",openid);
+		}
+	});
+}
+
+function loginout(){
+	localStorage.clear();
+}

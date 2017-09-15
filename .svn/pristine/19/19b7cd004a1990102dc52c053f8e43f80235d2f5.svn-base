@@ -1,0 +1,98 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>活动广场</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/index.css">
+<script src="./Public/Home/js/jquery.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+</head>
+
+<body>
+	<div id="bigbox">
+		<?php if(is_array($goodslist)): $i = 0; $__LIST__ = $goodslist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="listbox">
+	        	<img class="goodsimg" src="<?php echo ($vo["thumbnails"]); ?>">
+	            <div class="goodstext">
+	            	<h4 class="title"><?php echo ($vo["goodsname"]); ?></h4>
+	                <h6 class="price">￥<?php echo ($vo["goodsprice"]); ?><span style="font-size:14px;color:#646464;text-indent:11px; float:right">剩余<?php echo ($vo["goodsnumber"]); ?></span></h6>
+	                <ul class="buttonbox">
+	                	<li><a href="<?php echo ($vo["goodslink"]); ?>" class="button buy">立即购买</a></li>
+	                    <li><a href="#" class="button bordersubmit"  onclick="orderadd('<?php echo ($vo["id"]); ?>')">提交订单</a></li>
+	                </ul>
+	            </div>
+	        </div><?php endforeach; endif; else: echo "" ;endif; ?>
+        <p class="more">更多商品敬请期待</p>
+    </div>
+    
+    <div class="popbox">
+    	<div class="popconten">
+        	<h4 class="title">提交订单信息</h4>
+            <img src="./Public/Home/images/order.png" class="orderimg">
+            <input type="text" placeholder="填写订单号" class="inputcss ordernumber" id="ordernumber" name="ordernumber">
+            <input id="goodsid" name="goodsid" type="hidden">
+            <button id="ordersubmit" class="inputcss ordersubmit">提交</button>
+            <button id="cancel" class="inputcss cancel">取消</button>
+        </div>
+    
+    </div>
+    
+    <div id="msg">提交成功</div>
+</body>
+<script>
+function orderadd(id){
+	$("#goodsid").val(id);
+	$(".popbox").fadeIn(500);
+	}
+</script>
+<script>
+$(function(){
+	$widths = window.screen.width;
+	$heights = window.screen.availHeight;
+	$("#bigbox").css("height",$heights);
+	if($widths >= 350){
+		$imgheight = $(".goodsimg").height();
+		$(".goodstext").css("height",$imgheight);
+	}else{
+		$(".buttonbox").css("position","static");
+	};
+	
+	$("#cancel").click(function(){
+		$(".popbox").fadeOut(500);
+		})
+	function submitmsg(){
+		$("#msg").fadeIn(200,function(){
+			window.location.reload();
+		});
+		};
+	$("#ordersubmit").click(function(){
+		$id = $("#goodsid").val();
+		$ordernumber = $("#ordernumber").val();
+		if($ordernumber != ""){
+			$.ajax({
+			type:"post",
+			url:"?s=Goodslist/orderadd",
+			data:{id:$id,ordernumber:$ordernumber},
+			dataType : "json",			
+			success : function(data){
+				if(data['data'] == 0){
+						alert('提交成功');
+						window.location.reload();
+					}else if(data['data'] == 1){
+						alert('提交失败');
+						window.location.reload();
+					}else if(data['data'] == 3){
+						alert('您的可用免单次数已用完！');
+						/* window.location.reload(); */
+					}
+				}
+			});
+		}else{
+			alert('请填写订单号');
+		}
+	})
+})
+
+</script> 
+</html>

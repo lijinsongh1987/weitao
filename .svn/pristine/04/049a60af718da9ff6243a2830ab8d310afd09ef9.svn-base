@@ -1,0 +1,84 @@
+<script src="./Public/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+<script src="./Public/assets/js/jquery.blockUI.js" type="text/javascript"></script>
+<script src="./Public/admin/js/jquery.tgpt.app.js" type="text/javascript"></script>
+<script>
+$(function(){
+<?php
+	$toastr = $_SESSION['toastr'];
+	if($toastr){
+		unset($_SESSION['toastr']);
+		if($toastr['type']){
+			echo "showSuccessMessage('".$toastr['msg']."',".$toastr['showtime'].");";
+		}else{
+			echo "showErrorMessage('".$toastr['msg']."',".$toastr['showtime'].");";
+		}
+	}
+?>
+});
+
+/**
+ * post 璇锋眰
+ * 鎷撳睍 鏈嶅姟绔柟娉昦jaxReturn浼犲叆status 鐘舵��,info 鎻愮ず淇℃伅 杩欓噷鏍规嵁status鍜宨nfo杩涜鐩稿簲鎿嶄綔
+ * @param url 鍦板潃
+ * @param data post鍙傛暟
+ * @param 鍥炶皟鍑芥暟
+ */
+function sendAjax(url, data, callback) {
+    return $.ajax({
+        type: "POST",
+        url: url,
+        data: data,
+        dataType: "json",
+        success: function (data) {
+            var flag = true;
+            if (data == null) {
+                flag = false;
+                showErrorMessage("娌℃湁鏁版嵁杩斿洖", 1000);
+            }
+            else {
+                if (data["status"] != null) {
+                    if (data["status"] == 0) {
+                        showErrorMessage(data["info"], 1000);
+                        flag = false;
+                    }
+                }
+            }
+            if (flag) {
+                callback(data);
+            }
+        },
+        error: function (data) {
+            showErrorMessage("杩斿洖鏍煎紡閿欒", 1000);
+        }
+    });
+}
+function getJSON(url, data, callback) {
+    return $.ajax({
+        type: "GET",
+        url: url,
+        data: data,
+        dataType: "json",
+        success: function (data) {
+            var flag = true;
+            if (data == null) {
+                flag = false;
+                showErrorMessage("娌℃湁鏁版嵁杩斿洖", 1000);
+            }
+            else {
+                if (data["status"] != null) {
+                    if (data["status"] == 0) {
+                        showErrorMessage(data["info"], 1000);
+                        flag = false;
+                    }
+                }
+            }
+            if (flag) {
+                callback(data);
+            }
+        },
+        error: function (data) {
+            showErrorMessage("杩斿洖鏍煎紡閿欒", 1000);
+        }
+    });
+}
+</script>

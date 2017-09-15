@@ -1,0 +1,32 @@
+<?php
+
+class IndexAction extends Action{
+    public function index(){
+        $list = M("goods")->where("id is not null ".$and)->limit(20)->select();
+        //转换链接
+        $pid = "mm_30979406_3042389_10494070";
+        $pidlist = split("_",$pid);
+        //查询对应的tokenid
+        $tokenid = M("account")->where("member_id = '".$pidlist[1]."'")->find();
+        $url = "http://tbapi.00o.cn/highapi.php";
+        $linklist = array();
+        for($i = 0;$i < count($list);$i++) {
+        	$linklist =  split("&",$list[$i]['Quan_link']);
+        	$list[$i]['gourllink'] = $url."?"."item_id=".$list[$i]['GoodsID']."&adzone_id=".$pidlist[3]."&platform=1&site_id=".$pidlist[2]."&token=".$tokenid['access_token'];
+        	echo $list[$i]['gourllink']."<br/>";
+        }
+        $this->list = $list;
+        $this->display();       
+    }
+    
+    public function datajson(){
+        $conter = $_GET['counter'];
+        $conter = $conter*20;
+        $data = M('goods')->limit(20,$conter)->select();
+        //$data['sql'] = M()->getLastSql();
+        echo json_encode($data);
+    }
+   
+}
+
+?>

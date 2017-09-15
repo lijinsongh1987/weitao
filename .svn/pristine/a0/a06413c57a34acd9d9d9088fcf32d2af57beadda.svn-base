@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+=<title>聚点微淘运营管理系统</title>
+<link rel="stylesheet" href="./Public/css/base.css">
+<link rel="stylesheet" href="./Public/css/page.css">
+<include file="Public:common"/>
+<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+<link href="./Public/css/flat/style.css" rel="stylesheet">
+<link href="./Public/css/frame/style.css" rel="stylesheet">
+<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+<link rel="stylesheet" href="./Public/css/fenye.css" />
+<link rel="stylesheet" href="./Public/admin/editor/css/froala_editor.min.css" />
+<link rel="stylesheet" href="./Public/admin/editor/css/font-awesome.min.css" />
+<style>
+	
+	
+	.form-horizontal .form-group {
+    margin-right: 0px; 
+    margin-left:0px; 
+	}
+	@media (min-width: 768px)
+	bootstrap.min.css:5
+	.form-horizontal .control-label {
+    padding-top: 0px;
+    margin-bottom: 0;
+    text-align: right;
+}
+</style>
+</head>
+
+<body style="background:#f1f2f7">
+<div class="superWrap clearfix">
+	<!-- 侧边栏-->
+	<include file="Public:left"/>
+	<div class="superContent">
+		<!-- 头部-->
+		<div class="super-header super-header2">
+			<include file="Public:header"/>
+		</div>
+		<!-- 内容 -->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+		
+			<div class="col-lg-12" style="margin-top:20px;">
+			<form class="form-horizontal" method="post" action="?s=TaoBaoheader/editcaiji" enctype="multipart/form-data">
+			<input type="hidden" name="id" id="id" value="{$classlist.id}"/>
+				<div class="ibox-content">
+					<div class="form-group" style="overflow:hidden">
+	                   <label for="inputPassword1" class="control-label" style="float:left;display:block;width:5em;text-align:left;line-height:34px;padding-top: 0px;">文章分类</label>
+	                   <select name="typeid" id="typeid" class="form-control" style=" float:left;display:block;width:40em">                             
+	                             <volist name="headertype" id="vo">
+	                             	<option value="{$vo.columnid}" {$classlist['typeid']==$vo['columnid']?'selected':''}>{$vo.typename}</option>
+	                             </volist>
+	                		</select>
+	                   <span style="color:red;line-height:34px;margin-left:10px">*</span>
+	                   <a class="btn btn-primary" href="?s=TaoBaoheader/articlemanager" style="float:right;">返回上一页</a>
+	               	</div>
+	               	<div class="form-group" style="overflow:hidden">
+	                   <label for="inputPassword1" class="control-label" style="float:left;display:block;width:5em;text-align:left;line-height:34px;padding-top: 0px;">文章标题</label>
+	                   <input type="text" class="form-control" id="title" name="title" value="{$classlist.title}" style="float:left;display:block;width:40em">
+	                   <span style="color:red;line-height:34px;margin-left:10px">*</span>
+	               	</div>
+	               			<div class="form-group" style="overflow:hidden">
+	                   <label for="inputPassword1" class="control-label" style="float:left;display:block;width:5em;text-align:left;line-height:34px;padding-top: 0px;">发布时间及来源</label>
+	                   <input type="text" class="form-control" id="time" name="time" value="{$classlist.time}" style="float:left;display:block;width:40em">
+	                   <span style="color:red;line-height:34px;margin-left:10px">*</span>
+	               	</div>
+	               	<div class="form-group" style="overflow:hidden">
+	                   <label for="inputPassword1" class="control-label" style="float:left;display:block;width:5em;text-align:left;line-height:34px;padding-top: 0px;">文章封面</label>
+	                   <input type="file" class="form-control" id="picimage" name="picimage"style="float:left;display:block;width:40em">
+	                   <span style="color:red;line-height:34px;margin-left:10px">*</span>
+	               	</div>
+	               	<label for="inputPassword1" class="control-label" style="display:block;width:5em;text-align:left;line-height:34px;margin-top: 0px;">文章内容</label>
+		          	<script id="editor" name="editor" type="text/plain" style="width:100%;height:300px;">{$classlist.content}</script>
+		          	<div class="form-group" style="margin-top:20px;">
+	                	<button type="submit" class="btn btn-success" id="submit" >提交</button>
+	               	</div>
+		          	  
+				</div>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+		
+
+
+
+<!--时间插件-->
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+
+ <script src="./Public/admin/editor/js/froala_editor.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../../js/froala_editor_ie8.min.js"></script>
+  <![endif]-->
+  <script src="./Public/admin/editor/js/plugins/tables.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/colors.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/media_manager.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/font_family.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/font_size.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/block_styles.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/video.min.js"></script>
+  <script src="./Public/admin/editor/js/plugins/lists.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="./Public/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="./Public/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script>
+	$swidth = $("#zhanshibox").width();
+	$(".modifybox").width($swidth);
+	$sheight = $(window).height();
+	$(".modifybox").height($sheight);
+	$("#boxposition").height($sheight);
+	var ue = UE.getEditor('editor');
+
+	$('#myform').submit(function(){
+		var desc = $('#title').val();
+		if(UE.getEditor('editor').hasContents() && desc !=""){
+			return true;
+		}else{
+			return false;
+		}
+	})
+
+
+
+</script>
+
+</body>
+</html>

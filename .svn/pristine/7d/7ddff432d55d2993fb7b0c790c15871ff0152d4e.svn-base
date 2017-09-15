@@ -1,0 +1,38 @@
+<?php
+return array(
+	//'配置项'=>'配置值'
+	'URL_CASE_INSENSITIVE'=>false,
+	'URL_MODEL' => '3',
+    /* 数据库连接*/
+    'DB_TYPE'=>'mysql',
+// 	'DB_HOST'=>'rds323yewvlu9eo2rd1go.mysql.rds.aliyuncs.com',
+// 	'DB_USER'=>'bcdbroot',
+// 	'DB_PWD'=>'bcdbp_Zj080117',
+	'DB_HOST'=>'182.61.34.161',
+	'DB_USER'=>'taobaoke',
+	'DB_PWD'=>'Zj080117',
+	'DB_PORT'=>'3306',
+    'DB_NAME'=>'taobaoke',
+    'DB_PREFIX'=>'s_',
+//  	//RBAC认证配置
+//     'RBAC_SUPERADMIN'=>'admin', //超级管理员的账户  对应用户表中的一个用户
+//     'ADMIN_AUTH_KEY'=>'superadmin',//超级管理员身份识别
+//     'USER_AUTH_ON'=>true, //是否需要认证
+//     'USER_AUTH_TYPE'=>1, //认证类型 1 为登陆后认证 2 为实时认证
+//     'USER_AUTH_KEY'=>'authld',//认证识别号此名称可以自己取（为每个用户登录建议的key保存在session中）
+//     'NOT_AUTH_MODULE'=>'Index,Exit', //无需认证模块
+//     'USER_AUTH_GATEWAY'=>'/Login/index', //认证网关
+//     'RBAC_ROLE_TABLE'=>'s_role', //角色表名称
+//     'RBAC_USER_TABLE'=>'s_role_user', //用户表名称
+//     'RBAC_ACCESS_TABLE'=>'s_access', //权限表名称
+//     'RBAC_NODE_TABLE'=>'s_node', //节点表名称
+
+		//微信配置
+		'token'=>'woshijudianweitaodadadada53232',							 //服务器配置 token
+		'encodingaeskey'=>'ylNTvLBD236guCfYYYqGQXQhC8afE4mCAGuzVPg39ux', //消息加解密密钥
+		'appid'=>'wx745489cbb3c9135c',									 //开发者ID
+		'appsecret'=>'a39536234faac1c1ff6ccec464c6d9f4', 			     //开发者密码
+		'mchid'=>'1482930852',											 //商户号
+		
+);
+?>

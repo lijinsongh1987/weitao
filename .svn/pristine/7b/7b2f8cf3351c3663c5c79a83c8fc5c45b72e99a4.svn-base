@@ -1,0 +1,53 @@
+<?php
+class GoodsCenterAction extends BaseAction {
+	public function goodsmanager(){
+		import("ORG.Util.Page");
+		if($_GET['goodsid']){
+			$and .=" and gid = '".$_GET['goodsid']."'";
+		}
+		if($_GET['starttime']){
+			$starttime= $_GET['starttime'];
+			$and .= " and update_time >= '".$starttime." 00:00:00'";
+		}
+		if($_GET['endtime']){
+			$endtime= $_GET['endtime'];
+			$and .= " and update_time <= '".$endtime." 23:59:59'";
+		}
+		if($_GET['pricegt']){
+			$and .=" and Price >= ".$_GET['pricegt'];
+		}
+		if($_GET['pricelt']){
+			$and .=" and Price <= ".$_GET['pricelt'];
+		}
+		$totalRows = M("goods")->where("id is not null ".$and)->count();
+		$page= new Page($totalRows,20);
+		$this->list=M("goods")->where("id is not null ".$and)->limit($page->firstRow,$page->listRows)->order("update_time desc")->select();
+		$this->page= $page->show();
+		$this->display();
+	}
+	
+	public function tuijiantrue(){
+		$data['id'] = $_POST['id'];
+		$data['tuijianstatus'] = 1;
+		$is = M("goods")->save($data);
+		if ($is) {
+			$data2['msg'] = 1;
+		} else {
+			$data2['msg'] = 0;
+		}
+		echo json_encode;
+	}
+	
+	public function tuijiancannel(){
+		$data['id'] = $_POST['id'];
+		$data['tuijianstatus'] = 0;
+		$is = M("goods")->save($data);
+		if ($is) {
+			$data2['msg'] = 1;
+		} else {
+			$data2['msg'] = 0;
+		}
+		echo json_encode;
+	}
+}
+?>

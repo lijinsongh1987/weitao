@@ -1,0 +1,50 @@
+<?php
+
+class PersnoalAction extends Action{
+    public function persnoal(){
+        $this->display();       
+    }
+   
+    public function withdraw(){
+        $this->display();
+    }
+    
+    public function message(){
+        $this->display();
+    }
+    
+    public function invite(){
+        $this->display();
+    }
+    
+    public function calssroom(){
+        $this->display();
+    }
+    
+    public function setup(){
+        $this->display();
+    }
+    
+    public function coupon(){
+        $openid = 'o6vyL0_DwhNtOsO7OVMMjO1pkEaE';
+        $dates = strtotime(date("Y-m-d"));
+        $list=M()->table("wt_redbag a,wt_redtype b")->where("a.openid = '".$openid."' and a.tid = b.id")->field("a.id as redid,a.*,b.*")->select();
+        for($i = 0;$i < count($list);$i++){
+            if(!strtotime($list[$i]['faildate']) == 0){
+                if($dates > strtotime($list[$i]['faildate'])){
+                    $list[$i]['shixiao'] = 1;
+                }else{
+                    $list[$i]['shixiao'] = 0;
+                }
+                
+            }else{
+                $list[$i]['shixiao'] = 0;
+            }
+            
+        }
+        $this->list = $list;
+        $this->display();
+    }
+}
+
+?>

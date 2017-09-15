@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>聚点微淘运营管理系统</title>
+<link rel="stylesheet" href="./Public/css/base.css">
+<link rel="stylesheet" href="./Public/css/page.css">
+<include file="Public:common"/>
+<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+<link href="./Public/css/flat/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+<link rel="stylesheet" href="./Public//css/fenye.css" />
+<link rel="stylesheet" href="./Public/select/dist/css/bootstrap-select.css">
+<link rel="stylesheet" href="./Public/css/select2.min.css">
+
+
+<style>
+.btn-default {
+    background-color: #ffffff;
+    border-color: #ccc;
+    color: #777;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    background-color: #ffffff;
+    border-color: #ccc;
+    color: #777;
+}
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+}
+.ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+}
+.ibox-content {
+    clear: both;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+</style>
+</head>
+
+<body style="background:#f1f2f7">
+<div class="superWrap clearfix">
+	<!-- 侧边栏-->
+	<include file="Public:left"/>
+	<div class="superContent">
+		<!-- 头部-->
+		<div class="super-header super-header2">
+			<include file="Public:header"/>
+		</div>
+		<!-- 内容 -->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+			<div class="col-lg-12" style="margin-top:20px;">
+		      <div class="ibox float-e-margins">
+		          <div class="ibox-title">
+		              <h5>商品信息列表</h5>
+		          </div>
+		          <div class="ibox-content">
+		          <form action="" method="get">
+		           <input type="hidden" name="s" value="GoodsCenter/goodsmanager">
+		          	  <div class="row">
+		          	  	<div class="col-lg-2 col-md-2">
+	                       <input placeholder="商品ID" class="form-control" type="text" name="goodsid" id="goodsid" value="{$_GET['phonenumber']}" style=" height:36px;">
+	                    </div>
+	                    <div class="col-sm-2 m-b-xs">
+	                        <input placeholder="导入日期（开始）" value="{$_GET['starttime']}" class="laydate-icon-molv skindemo form-control" name="starttime" id="starttime" style=" height:36px;cursor:pointer">
+	                    </div>
+	                    <div class="col-sm-2 m-b-xs row">
+	                        <input placeholder="导入日期（结束）" value="{$_GET['endtime']}" class="laydate-icon-molv skindemo form-control" name="endtime" id="endtime" style=" height:36px;cursor:pointer">
+	                    </div>
+	                    <div class="col-lg-2 col-md-2">
+	                       <input placeholder="卷后价（大于等于）" class="form-control" type="text" name="pricegt" id="pricegt" value="{$_GET['pricegt']}" style=" height:36px;">
+	                    </div>
+	                    <div class="col-lg-2 col-md-2">
+	                       <input placeholder="卷后价（小于等于）" class="form-control" type="text" name="pricelt" id="pricelt" value="{$_GET['pricelt']}" style=" height:36px;">
+	                    </div>
+	                    <div class="col-lg-2">
+		                    <button type="submit" class="btn btn-sm btn-primary" style=" height:36px; width:5em">查询</button>
+		                </div>
+		          	  </div>
+		          	</form>
+		            <table class="table table-hover table-bordered" style="margin-top:20px;">
+		                  <thead>
+		                      <tr>
+		                      	  <th style="text-align:center;">导入时间</th>
+		                      	  <th style="text-align:center;">商品ID</th>
+		                      	  <th style="text-align:center;">商品名称</th>
+		                      	  <th style="text-align:center;">商品图片</th>
+		                      	  <th style="text-align:center;">正常售价</th>
+		                      	  <th style="text-align:center;">卷后价</th>
+		                      	  <th style="text-align:center;">是否天猫</th>
+		                      	  <th style="text-align:center;">商品销量</th>
+		                      	  <th style="text-align:center;">商品描述分</th>
+		                      	  <th style="text-align:center;">优惠卷价格</th>
+		                      	  <th style="text-align:center;">优惠卷结束时间</th>
+		                      	  <th style="text-align:center;">优惠卷剩余数量</th>
+		                      	  <th style="text-align:center;">优惠卷已领数量</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  	<volist name="list" id="vo">
+		                      <tr style="text-align:center;">
+			                      <td>{$vo.update_time}</td>
+			                      <td>{$vo.gid}</td>
+		                          <td>{$vo.D_title}</td>
+		                          <td><img src="{$vo.Pic}" onclick='tip(this)' data="{$vo.Pic}" style="width:30px;height:30px;"/></td>
+		                          <td>{$vo.Org_Price}</td>
+		                          <td>{$vo.Price}</td>
+		                          <td>
+		                          <if condition="$vo.IsTmall eq 0">
+		                          否
+		                          <else/>
+		                          是
+		                          </if>
+		                          </td>
+		                          <td>{$vo.Sales_num}</td>
+		                          <td>{$vo.Dsr}</td>
+		                          <td>{$vo.Quan_price}</td>
+		                          <td>{$vo.Quan_time}</td>
+		                          <td>{$vo.Quan_surplus}</td>
+		                          <td>{$vo.Quan_receive}</td>
+		                      </tr>
+		                    </volist> 
+		                  </tbody>
+		              </table>
+		              <div	class="fenye">
+				     	{$page}
+				     </div>
+		          </div>
+		      </div>
+		  </div>
+		</div>
+	</div>
+</div>
+
+<!--时间插件-->
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/select/dist/js/bootstrap-select.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script src="./Public/js/select2.full.min.js"></script>
+<script src="./Public/js/zh-CN.js"></script>
+<script>
+$(function(){
+	laydate.skin('molv');
+	laydate({
+		  elem: '#starttime',
+		  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		});
+	laydate({
+		  elem: '#endtime',
+		  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		});
+	
+});
+	
+function tip(obj){
+	 var image  = $(obj).attr('data');
+	 $index = layer.tips('<img style="width:300px; height:300px;" src="'+image+'"/>', obj,{area:['320px','310px'],tips:[2,'#FAFAFA']}); 
+}
+</script>
+
+</body>
+</html>

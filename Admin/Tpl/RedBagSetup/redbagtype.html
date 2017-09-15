@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>聚点微淘运营管理系统</title>
+	<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/page.css">
+	<include file="Public:common"/>
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+	
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="./Public/table/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+</head>
+
+<body>
+<div class="superWrap clearfix" style="height: 781px;">
+	<include file="Public:left"/>
+	<!--side E-->
+	<!--content S-->
+	<div class="superContent">
+	<div class="super-header super-header2">
+	<include file="Public:header"/>
+	</div>	
+		<!--header-->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+			<div class="col-lg-12" style="margin-top:20px;">
+		      <div class="ibox float-e-margins">
+		          <div class="ibox-title">
+		              <h5>红包分类信息表</h5>
+		          </div>
+		          <div class="ibox-content">
+		          <form action="" method="get">
+					<input type="hidden" name="s" value="RedBagSetup/redbagtype">
+		          	  <div class="row">
+		          	  	<div class="col-sm-2 m-b-xs" >
+	                       <input placeholder="请输入红包名" class="form-control" type="text"  style=" height:36px;" name="name" id="name" value="{$_GET['name']}">
+	                    </div>
+	                    
+	                    <div class="col-sm-10">
+		                    <button type="submit" class="btn btn-sm btn-primary" style=" height:36px; width:5em">查询</button>
+		                    <a href="#myModal-1" data-toggle="modal" class="btn btn-sm btn-success" style=" height:36px; width:8em;line-height:24px;margin-left:10px;">添加红包分类 </a>
+		                 </div>
+		          	  </div>
+		          	  </form>
+		              <table class="table table-hover table-bordered" style="margin-top:20px;">
+		                  <thead>
+		                      <tr>
+		                      	  <th style="text-align:center;">编号</th>
+		                          <th style="text-align:center;">红包名称</th>
+		                          <th style="text-align:center;">起用金额</th>
+		                          <th style="text-align:center;">红包金额</th>
+		                          <th style="text-align:center;">有效时间</th>
+		                          <th style="text-align:center;">创建时间</th>
+		                          <th style="text-align:center;">操作</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  	<volist name="list" id="vo">
+		                      <tr>
+		                      		<td style="text-align:center;">{$vo.id}</td>
+		                          <td style="text-align:center;">{$vo.typename}</td>
+		                          <td style="text-align:center;">{$vo.condition}</td>
+		                          <td style="text-align:center;">{$vo.price}</td>
+		                          <td style="text-align:center;">{$vo.failtime}</td>
+		                          <td style="text-align:center;">{$vo.createtime}</td>
+		                          <td style="text-align:center;">
+		                          <a href="javascript:void(0);" class="btn btn-warning" onclick="sendredbag('{$vo.id}','{$vo.typename}');">发送</a>
+		                          <a href="#myModal-1" data-toggle="modal" mce_href="" class="btn btn-success" onclick="editpartment('{$vo.id}','{$vo.typename}','{$vo.condition}','{$vo.price}','{$vo.failtime}');">编辑</a>
+		                          </td>
+		                      </tr>
+		                      </volist>
+		                  </tbody>
+		              </table>
+		          </div>
+		      </div>
+		  </div>
+		</div>
+		<!--main-->
+		
+	</div>
+	<!--content E-->
+	
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:480px">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">红包信息</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal">
+                	<input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">红包名称</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="typename"  name="typename">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">起用金额</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="condition"  name="condition">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">红包金额</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="price"  name="price">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">有效时间</label>
+                        <div class="col-lg-8">
+                            <input class="laydate-icon-molv skindemo form-control" name="failtime" id="failtime" style="height: 36px; cursor: pointer">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-10">
+                            <button type="button" class="btn btn-success" id="submit-btn">提交</button>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--时间插件-->
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+$(window).resize();
+
+laydate.skin('molv');
+laydate({
+	elem : '#failtime',
+	format : 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+	festival : true, //显示节日
+});
+
+
+</script>
+<script>
+$(document).ready(function(){
+	$("#laydate_box").css("box-sizing","content-box");
+	});
+
+function editpartment(id,typename,condition,price,failtime){
+	$("#id").val(id);
+	$("#typename").val(typename);
+	$("#condition").val(condition);
+	$("#price").val(price);
+	$("#failtime").val(failtime);
+}
+$("#submit-btn").click(function(){
+	var id = $("#id").val();
+	var typename=$("#typename").val();
+	var condition=$("#condition").val();
+	var price=$("#price").val();
+	var failtime=$("#failtime").val();
+	if(typename != "" && condition != "" && price != "" && failtime != ""){
+		$.ajax({
+			type:"post",
+			url:"?s=RedBagSetup/editredbagtype",
+			data:{'id':id,'typename':typename,'condition':condition,'price':price,'failtime':failtime},
+			dataType : "json",			
+			success : function(data){
+				if(data['msg'] == 1){
+					layer.msg('操作成功',{time:800},function(){
+						location.reload(true);
+					});
+				}else if(data['msg'] == 2){
+					layer.msg('操作失败',{time:800});
+				}
+			}
+		});
+	}else{
+	 	//layer.msg('请填写相关数据',{time:800});
+	 	layer.msg('请填写相关数据',{time:800});
+	}
+});
+
+function sendredbag(id,typename){
+	if (!confirm("确定发放"+typename+"?")) {
+		return false;
+	}
+	$.ajax({
+		type:"post",
+		url:"?s=RedBagSetup/sendredbag",
+		data:{'id':id},
+		dataType : "json",			
+		success : function(data){
+			if(data['msg'] == 1){
+				layer.msg('操作成功',{time:800},function(){
+					location.reload(true);
+				});
+			}else if(data['msg'] == 2){
+				layer.msg('操作失败',{time:800});
+			}
+		}
+	});
+}
+</script>
+
+</body></html>

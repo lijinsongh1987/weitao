@@ -1,0 +1,150 @@
+@charset "utf-8";
+/* CSS Document */
+
+#bigbox{
+	background:url(../images/personal_bg.png) top center no-repeat #f3f3f3; background-size:100%;
+	padding-bottom:20px;
+	}
+.personalbox{
+	padding:0.5rem;
+	padding-top:0.625rem;
+	padding-bottom:0.625rem;
+	overflow:hidden;
+	}
+	.personalbox img{
+		float:left;
+		width:68px;
+		border-radius:999px;
+		border:3px #fff solid
+		}
+	.textbox{
+		color:#fff;
+		text-indent:0.3125rem;
+		font-size:18px;
+		margin-top:0.3125rem;
+		}
+.textbox h6{
+	font-size:14px;
+	margin-top:0.5em;
+	}
+.clickbox{
+	margin-left:0.5rem;
+	margin-right:0.5rem;
+	background:#fff;
+	}	
+.floatclick{
+	width:50%;
+	float:left;
+	}
+.clickboxlist{
+	overflow:hidden;
+	padding-top:0.625rem;
+	padding-bottom:0.625rem;
+	}
+.floatclick img{
+	width:30px;
+	margin:0 auto;
+	}
+.floatclick p{
+	text-align:center;
+	font-size:15px;
+	margin-top:0.4em;
+	color:#161616;
+	}
+.rule{
+	padding:0.4rem;
+	font-size:16px;
+	color:#646464
+	}
+.order_href{
+	display:block;
+	background:#fff;
+	margin-left:0.5rem;
+	margin-right:0.5rem;
+	margin-top:0.5rem;
+	overflow:hidden;
+	padding:0.5rem;
+	}
+.order_href:hover{
+	color:#161616;
+	text-decoration:none;
+	}	
+.order_href img{
+	width:30px;
+	float:left;
+	}	
+.order_href h4{
+	color:#161616;
+	float:left;
+	line-height:1em;
+	font-size:16px;
+	}	
+.order_href .more{
+	width:10px;
+	float:right;
+	margin-top:10px;
+	}	
+.popbox{
+	width:100%;
+	max-width:1024px;
+	height:100%;
+	background:rgba(0,0,0,0.6);
+	position:fixed;
+	top:0;
+	display:none;
+	z-index:9;
+	}
+.pop{
+	width:288px;
+	background:#fff;
+	position:fixed;
+	top:20%;
+	left:50%;
+	margin-left:-144px;
+	border-radius:6px;
+	overflow:hidden;
+	padding-bottom:0.625rem;
+	padding-top:1rem;
+	}	
+.pop .displayimg{
+	width:158px;
+	margin:0 auto;
+	}
+.pop p{
+	color:#161616;
+	font-size:16px;
+	text-align:center;
+	}
+.no{
+	background:#439df9;
+	width:80%;
+	display:block;
+	margin:0 auto;
+	color:#fff;
+	line-height:2.6em;
+	font-size:16px;
+	text-align:center;
+	border-radius:666px;
+	margin-top:1em;
+	}
+.yes{
+	background:#ff921e;
+	width:80%;
+	display:block;
+	margin:0 auto;
+	color:#fff;
+	line-height:2.6em;
+	font-size:16px;
+	text-align:center;
+	border-radius:666px;
+	margin-top:1em;
+	}
+.cancel{
+	width:80%;
+	display:block;
+	margin:0 auto;
+	margin-top:1em;
+	color:#969696;
+	background:none;
+	border:none;
+	}

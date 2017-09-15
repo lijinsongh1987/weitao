@@ -1,0 +1,21 @@
+<?php
+
+class LoginAction extends Action{
+    public function login(){
+        
+        $this->display();       
+    }
+    
+    public function insertuserinfo(){
+    	$data['nickname'] = $_GET['nickname'];
+    	$data['imageurl'] = $_GET['imageurl'];
+    	$data['openid'] = $_GET['openid'];
+    	$list = M("weixinuser")->where("openid = '".$_GET['openid']."'")->select();
+    	if (!$list) {
+    		M("weixinuser")->add($data);
+    	}
+    }
+   
+}
+
+?>

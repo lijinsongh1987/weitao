@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>聚点微淘运营管理系统</title>
+<link rel="stylesheet" href="./Public/css/base.css">
+<link rel="stylesheet" href="./Public/css/page.css">
+<include file="Public:common"/>
+<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+<link href="./Public/css/flat/style.css" rel="stylesheet">
+<link href="./Public/css/frame/style.css" rel="stylesheet">
+<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+<link rel="stylesheet" href="./Public/css/fenye.css" />
+<link rel="stylesheet" href="./Public/admin/editor/css/froala_editor.min.css" />
+<link rel="stylesheet" href="./Public/admin/editor/css/font-awesome.min.css" />
+<style>
+	#boxposition{
+	position:relative
+	}
+	.modifybox{
+	position:absolute;
+	z-index:99;
+	top:0;
+	width:100%;
+	display:none
+	}
+</style>
+</head>
+
+<body style="background:#f1f2f7">
+<div class="superWrap clearfix">
+	<!-- 侧边栏-->
+	<include file="Public:left"/>
+	<div class="superContent">
+		<!-- 头部-->
+		<div class="super-header super-header2">
+			<include file="Public:header"/>
+		</div>
+		<!-- 内容 -->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+		
+			<div class="col-lg-12" style="margin-top:20px;" id="boxposition">
+			
+				<div class="ibox float-e-margins" id="zhanshibox">
+					<div class="ibox-title" style="overflow:hidden">
+		              <h5 style="line-height:36px;">淘宝文章列表</h5>
+		          	</div>
+		          	
+		          	  <div class="ibox-content">
+		          	  	<form action="" method="get" style="background:#fff">
+			          	<input type="hidden" name="s" value="TaoBaoheader/articlemanager"/> 
+						<div class="row">
+							 <div class="col-lg-2 col-md-2">
+										<input placeholder="文章编号" class="form-control" type="text"
+											name="id" id="id" value="{$_GET['id']}"
+											style="height: 36px;">
+									</div>
+									<div class="col-sm-2 m-b-xs">
+										<input placeholder="采集日期（开始）" value="{$_GET['starttime']}"
+											class="laydate-icon-molv skindemo form-control"
+											name="starttime" id="starttime"
+											style="height: 36px; cursor: pointer">
+									</div>
+									<div class="col-sm-2 m-b-xs row">
+										<input placeholder="采集日期（结束）" value="{$_GET['endtime']}"
+											class="laydate-icon-molv skindemo form-control"
+											name="endtime" id="endtime"
+											style="height: 36px; cursor: pointer">
+									</div>
+									<div class="col-lg-2 col-md-2">
+										<select name="headertype" class="form-control" id="headertype"
+											style="height: 36px;">
+											<option value="0" {$_GET['headertype']==0?'selected':''}>请选择分类</option>
+											<volist name="headertype" id="vo">
+											<option value="{$vo.id}" {$_GET['headertype']==$vo['id']?'selected':''}>{$vo.typename}</option>
+											</volist>
+										</select>
+									</div>
+									<div class="col-lg-4">
+										<button type="submit" class="btn btn-sm btn-primary"
+											style="height: 36px; width: 5em">查询</button>
+									</div>
+			          	  </div>
+		          	  </form>
+		          		<table class="table table-hover table-bordered">
+		                  <thead>
+		                      <tr>
+		                      	<th style="text-align:center;vertical-align:middle;">编号</th>
+		                      	<th style="text-align:center;vertical-align:middle;">标题</th>
+		                      	<th style="text-align:center;vertical-align:middle;">发布时间及来源</th>
+		                      	<th style="text-align:center;vertical-align:middle;">文章封面</th>
+		                          <th style="text-align:center;vertical-align:middle;">文章分类</th>
+		                          <th style="text-align:center;vertical-align:middle;">采集日期</th>
+		                          <th style="text-align:center;vertical-align:middle;">状态</th>
+		                          <th style="text-align:center;vertical-align:middle;">有效日期</th>
+		                          <th style="text-align:center;vertical-align:middle;">操作</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  <volist name="list" id="vo" class="row">
+	                      	<tr>
+	                      			<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.id}</td>
+	                      			<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.title}</td>
+		                          	<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.time}</td>
+		                          	<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;"><img  onclick='tip(this)' data="{$vo.picimage}" src="{$vo.picimage}" width="100" height="30"/></td>
+		                          	<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.typename}</td>
+		                          	<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.createtime}</td>
+		                          	<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">
+		                          	<if condition="$vo.status eq 0">
+		                          	未发布
+		                          	</if>
+		                          	<if condition="$vo.status eq 1">
+		                          	已发布
+		                          	</if>
+		                          	</td>
+		                          	<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">
+		                          	{$vo.shixiaotime}
+		                          	</td>
+		                          	<td class="col-lg-6" style="text-align:center;">
+		                          		<if condition="$vo.status eq 0">
+		                          	<a href="#myModal-1" data-toggle="modal" mce_href="" class="btn btn-outline btn-primary" onclick="editpartment('{$vo.id}');">发布文章</a>
+		                          	</if>
+		                          		<a  href="?s=TaoBaoheader/editconten/id/{$vo.id}" class="btn btn-outline btn-primary" >修改</a>
+		                          		<button  type="button" class="btn btn-outline btn-danger" onclick='del("{$vo.id}")'>删除</button>
+		                          	</td>
+		                      </tr>
+		                      </volist>
+		                  </tbody>
+		              </table>
+		          		<div	class="fenye">
+				     	{$page}
+				     </div>
+		          	</div>
+				</div>
+					
+				</div>
+				
+			</div>
+		  
+		 
+		  
+		</div>
+		
+	</div>
+		
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:480px">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">分类信息</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal">
+                	<input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">有效日期</label>
+                        <div class="col-lg-8">
+                            <input class="laydate-icon-molv skindemo form-control" name="shixiaotime" id="shixiaotime" style="height: 36px; cursor: pointer">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-10">
+                            <button type="button" class="btn btn-success" id="submit-btn">提交</button>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+			
+        </div>
+    </div>
+</div>
+
+
+<!--时间插件-->
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+laydate.skin('molv');
+laydate({
+	elem : '#shixiaotime',
+	format : 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+	festival : true, //显示节日
+});
+function del(id){
+	if (!confirm("确认删除?")) {
+        return;
+    }
+	$.getJSON("?s=TaoBaoheader/delcaiji",{'id':id},function(data){
+		if (data) {
+			if(data['msg'] == 1){
+				layer.msg('删除成功',{time:800},function(){
+					location.reload(true);
+				});
+			}else{
+				layer.msg('删除失败！',{time:800});
+			}
+		}
+	});
+}
+
+function editpartment(id){
+	$("#id").val(id);
+}
+$("#submit-btn").click(function(){
+	var id = $("#id").val();
+	var starttime = $("#shixiaotime").val();
+	if (starttime != "") {
+		$.ajax({
+			type:"post",
+			url:"?s=TaoBaoheader/pusharticle",
+			data:{'id':id,'shixiaotime':starttime},
+			dataType : "json",			
+			success : function(data){
+				//layer.msg(data['sql'],{time:80000});
+				if(data['msg'] == 1){
+					layer.msg('操作成功',{time:800},function(){
+						location.reload(true);
+					});
+				}else if(data['msg'] == 2){
+					layer.msg('操作失败',{time:800});
+				}
+			}
+		});
+	} else {
+		layer.msg('带*号为必填项',{time:800});
+	}
+});
+function tip(obj){
+	 var image  = $(obj).attr('data');
+	 $index = layer.tips('<img style="width:300px; height:300px;" src="'+image+'"/>', obj,{area:['320px','310px'],tips:[2,'#FAFAFA']}); 
+}
+</script>
+
+</body>
+</html>

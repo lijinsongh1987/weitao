@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>新手课堂</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+
+#conten{
+	padding: 0.3125rem;
+}
+.message-box{
+	background: #fff;
+	padding: 0.3125rem;
+	border-radius: 3px;
+	margin-bottom: 0.3125rem;
+	display: -webkit-flex;
+}
+.message-box .text-box{
+	position: relative;
+	flex:1;
+}
+.message-box h2{
+	font-size: 16px;
+	color: #414141;
+	position: absolute;
+	top:5px;
+}
+.message-box img{
+	width:62px;
+	height:62px;
+	margin-right: 10px;
+}
+.message-box p{
+	font-size: 12px;
+	color: #999;
+	margin-top: 10px;
+	position: absolute;
+	bottom:5px;
+}
+</style>
+</head>
+
+<body>
+
+	
+	<section id="conten">
+		<volist name="list" id="vo">
+			<a class="message-box" onclick="classroomDetail('{$vo.id}')"><!--带一个文章ID到?s=Persnoal/textcontent  -->
+				<img src="{$vo.imgurl}">
+				<div class="text-box">
+					<h2>{$vo.title}</h2>
+					<p>{$vo.time}</p>
+				</div>
+			</a>
+		</volist>
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+
+
+    
+</html>

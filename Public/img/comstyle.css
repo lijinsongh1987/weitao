@@ -1,0 +1,31 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, div, iframe, ul, ol, dl, dt, dd, h1, h2, h3, h4, h5, h6, p, pre, table, th, td, 
+form, input, button, select, textarea {margin: 0;padding: 0;font-weight: normal;font-style: normal;font-size: 100%;font-family:'微软雅黑','Microsoft Yahei';}
+html{ width:100%; max-width:750px; margin:0 auto;}
+ol, ul {list-style: none;}
+img {border: 0;}
+a:link,a:visited {color:#333;text-decoration:none;}
+a:hover {color:#f00;text-decoration:none;}
+body {font-size:16px;color:#161616;font-family:'微软雅黑','Microsoft Yahei', Tahoma,Verdana;background:#fff; width:100%; max-width:750px;display:block;margin:0 auto;}
+div,form,img,ul,ol,li,dl,dt,dd {margin: 0; padding: 0; border:0; }
+h1,h2,h3,h4,h5,h6 {margin:0; padding:0; font-size:12px; font-weight:normal;}
+table,td,tr,th{font-size:12px;}
+li{list-style-type:none;}
+img{vertical-align:top; display:block;}
+a:hover {-webkit-transition:all linear .218s;-moz-transition:all linear .218s;transition:all linear .218s}
+#bigbox{ width:100%; max-width:750px; background:url(bg.png) top center; height:auto;}
+.erweima{width:120px; background:#FFFFFF; height:120px; margin:0 auto; overflow:hidden;}
+.erweima img{ width:100%;}
+.titleimg{ width:200px; margin:0 auto; padding-top:60px;}
+.jstest{ width:90%; color:#fff; text-align:justify; font-size:16px; margin:0 auto; text-align:justify;max-width:280px; margin-top:15px; margin-bottom:15px;}
+.liuchengimg{width:80px; margin:0 auto; padding-top:20px; margin-bottom:10px;}
+.test-bg{ background:#4572d8; padding-bottom:15px;}
+.eross{ text-align:center; font-size:15px; margin-top:10px; color:#ffcd20; font-weight:700}
+.popbox{ width:100%; max-width:750px; position:fixed; top:0; overflow:hidden; background:#f3f3f3; padding-top:5px; padding-bottom:5px;}
+.popbox img{ float:left; width:18px; margin-left:15px;}
+.popbox p{ color:#1aac19; float:left; margin-left:10px;}
+.popbox a{ display:block; float:right; width:15px; height:15px; margin-right:15px; background:url(delete.png) center center no-repeat; background-size:15px; margin-top:1.5px;}
+.liuchengtext{ text-align:center; color:#4572d8; font-size:18px;}
+.jiantou{ width:20px; display:block; margin:0 auto; margin-top:5px; margin-bottom:5px;}

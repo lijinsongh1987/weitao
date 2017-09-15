@@ -1,0 +1,80 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>物流信息追踪</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/order.css">
+<script src="./Public/Home/js/jquery.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+</head>
+
+<body>
+	<div id="bigbox">
+		<?php if(is_array($logistics)): $i = 0; $__LIST__ = $logistics;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="list">
+	            <div class="listbox">
+	                <img class="goodsimg" src="<?php echo ($vo["thumbnails"]); ?>">
+	                <div class="goodstext logistics">
+	                     <h4>物流状态&nbsp;&nbsp;<span>包裹已出库</span></h4>
+	                     <p>订单来源：<?php echo ($vo["delivery"]); ?></p>
+	                     <p>运单编号：<?php echo ($vo["waybillnumber"]); ?></p>
+	                     <p>官方电话：<?php echo ($vo["phone"]); ?></p>
+	                </div>
+	            </div>
+	        </div><?php endforeach; endif; else: echo "" ;endif; ?>
+    	
+        <div class="track">
+        	<h4>物流跟踪</h4>
+            <hr>
+            <div class="msgbox">
+            	<div class="imgbox">
+                	<img src="./Public/Home/images/track_active.png" class="msgimg">
+                    <p></p>
+                </div>
+                <div class="textbox">
+                	<h4 class="active">包裹已从分拨中心发出包裹已从分拨中心发出包裹已从分拨中心发出包裹已从分拨中心发出包裹已从分拨中心发出包裹已从分拨中心发出</h4>
+                    <h6 class="active">2017-06-14	15:32</h6>
+                </div>
+            </div>
+            <div class="msgbox">
+            	<div class="imgbox">
+                	<img src="./Public/Home/images/track.png" class="msgimg">
+                    <p></p>
+                </div>
+                <div class="textbox">
+                	<h4>包裹已从分拨中心发出</h4>
+                    <h6>2017-06-14	15:32</h6>
+                </div>
+            </div>
+            
+            <div class="msgbox">
+            	<div class="imgbox">
+                	<img src="./Public/Home/images/track.png" class="msgimg">
+                    
+                </div>
+                <div class="textbox">
+                	<h4>包裹已从分拨中心发出</h4>
+                    <h6>2017-06-14	15:32</h6>
+                </div>
+            </div>
+            
+            
+        </div>
+        
+    </div>
+</body>
+<script>
+
+$(function(){
+	$imgwidth = $(".imgbox").width();
+	$maxwidth = $(".msgbox").width();
+	$imgwidth = $maxwidth -25;
+	
+	$(".textbox").width($imgwidth);
+	$imgheight = $(".textbox").height();
+	$(".imgbox").height($imgheight+20);
+	$(".imgbox p").height($imgheight+20);
+	})
+</script>
+</html>

@@ -1,0 +1,125 @@
+@CHARSET "UTF-8";
+#conten{
+	padding-bottom:15px;
+	background: #f3f3f3;
+}
+#ps-inf-box{
+	width:100%; 
+    background:-moz-linear-gradient(left, rgba(255,136,31,1) , rgba(255,84,0,1));  
+    background:-webkit-linear-gradient(left, rgba(255,136,31,1) , rgba(255,84,0,1));  
+    background:-o-linear-gradient(left, rgba(255,136,31,1) , rgba(255,84,0,1)); 
+    background:linear-gradient(left, rgba(255,136,31,1) , rgba(255,84,0,1));
+    display: -webkit-flex;
+    justify-content:space-between;
+    padding:24px 15px 20px 15px;
+}
+#ps-inf-box img{
+	width:62px;
+	height:62px;
+}
+#ps-inf-box .inf{
+	flex:1;
+	font-size:16px;
+	color:#fff;
+	margin-top:10px;
+	margin-left:10px;
+	}
+	
+#ps-inf-box	.set-up img{
+	width:17px;
+	height:16px;
+	margin-top:23px;
+	border-radius: 66px;
+}
+#money-box{
+	background: #fff;
+	display: -webkit-flex;
+	padding:15px 0px 15px 0px;
+}
+#money-box .money{
+	flex:1;
+	text-align: center;
+}
+#money-box .xian{
+	width:1px;
+	height:44px;
+	background: #f3f3f3;
+}
+.money h2{
+	font-size: 18px;
+	color:#ff0000;
+	font-weight: 600
+}
+.money p{
+	color:#969696;
+	margin-top:5px;
+	font-size: 14px;
+}
+#icon-box{
+	width:100%;
+	background: #fff;
+	margin-top:10px;
+}
+.icon-box{
+	display: -webkit-flex;
+}
+.icon-box .icon{
+	color:#161616;
+	flex:1;
+}
+.icon-box .icon:hover{
+	text-decoration: none
+}
+.icon-box .vertical-line{
+	width:1px;
+	background: #f3f3f3;
+}
+.horizontal-line{
+	width:100%;
+	height:1px;
+	background: #f3f3f3;
+}
+.icon img{
+	width:33px;
+	height:33px;
+	margin: 0 auto;
+	margin-top:15px;
+}
+.icon span{
+	width:100%;
+	display:block;
+	text-align: center;
+	margin-top:10px;
+	margin-bottom:15px;
+	font-size: 14px;
+}
+#other-box{
+	background: #fff;
+	padding-left:15px;
+	margin-top:10px;
+}
+.other-box{
+	width:100%;
+	border-bottom:#f3f3f3 1px solid;
+	display: -webkit-flex;
+	padding-top:15px;
+	padding-bottom:15px;
+    justify-content:space-between;
+}
+.other-box .other-icon{
+	width:33px;
+	height:33px;
+}
+.other-box .more{
+	width:9px;
+	height:15px;
+	align-self:center;
+	margin-right:15px;
+}
+.other-box span{
+	flex:1;
+	margin-left:10px;
+	color:#161616;
+	align-self:center;
+	font-size: 14px;
+}

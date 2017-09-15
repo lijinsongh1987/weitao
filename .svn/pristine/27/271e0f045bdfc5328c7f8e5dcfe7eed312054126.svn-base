@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>聚点微淘运营管理系统</title>
+<link rel="stylesheet" href="./Public/css/base.css">
+<link rel="stylesheet" href="./Public/css/page.css">
+<include file="Public:common"/>
+<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+<link href="./Public/css/flat/style.css" rel="stylesheet">
+
+<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+<link rel="stylesheet" href="./Public//css/fenye.css" />
+<link rel="stylesheet" href="./Public/select/dist/css/bootstrap-select.css">
+<link rel="stylesheet" href="./Public/css/select2.min.css">
+
+
+<style>
+.btn-default {
+    background-color: #ffffff;
+    border-color: #ccc;
+    color: #777;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+    background-color: #ffffff;
+    border-color: #ccc;
+    color: #777;
+}
+.ibox-title {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #ffffff;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 4px 0px 0;
+    color: inherit;
+    margin-bottom: 0;
+    padding: 14px 15px 7px;
+    min-height: 48px;
+}
+.ibox {
+    clear: both;
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding: 0;
+}
+.ibox-content {
+    clear: both;
+}
+.ibox-content {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 0px;
+}
+</style>
+</head>
+
+<body style="background:#f1f2f7">
+<div class="superWrap clearfix">
+	<!-- 侧边栏-->
+	<include file="Public:left"/>
+	<div class="superContent">
+		<!-- 头部-->
+		<div class="super-header super-header2">
+			<include file="Public:header"/>
+		</div>
+		<!-- 内容 -->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+			<div class="col-lg-12" style="margin-top:20px;">
+		      <div class="ibox float-e-margins">
+		          <div class="ibox-title">
+		              <h5>申请代理信息列表</h5>
+		          </div>
+		          <div class="ibox-content">
+		          <form action="" method="get">
+		           <input type="hidden" name="s" value="Proxy/proxySetup">
+		          	  <div class="row">
+		          	  	<div class="col-lg-2 col-md-2">
+	                       <input placeholder="手机号" class="form-control" type="text" name="phonenumber" id="phonenumber" value="{$_GET['phonenumber']}" style=" height:36px;">
+	                    </div>
+	                    <div class="col-sm-2 m-b-xs">
+	                        <input placeholder="开始日期" value="{$_GET['starttime']}" class="laydate-icon-molv skindemo form-control" name="starttime" id="starttime" style=" height:36px;cursor:pointer">
+	                    </div>
+	                    <div class="col-sm-2 m-b-xs row">
+	                        <input placeholder="结束日期" value="{$_GET['endtime']}" class="laydate-icon-molv skindemo form-control" name="endtime" id="endtime" style=" height:36px;cursor:pointer">
+	                    </div>
+	                    <div class="col-lg-6">
+		                    <button type="submit" class="btn btn-sm btn-primary" style=" height:36px; width:5em">查询</button>
+		                </div>
+		          	  </div>
+		          	</form>
+		            <table class="table table-hover table-bordered" style="margin-top:20px;">
+		                  <thead>
+		                      <tr>
+		                      	  <th style="text-align:center;">申请代理人手机号码</th>
+		                      	  <th style="text-align:center;">申请代理费用</th>
+		                      	  <th style="text-align:center;">申请时间</th>
+		                          <th style="text-align:center;">操作</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  	<volist name="daililist" id="vo">
+		                      <tr style="text-align:center;">
+			                      <td>{$vo.phonenum}</td>
+		                          <td>{$vo.applyproxy}</td>
+		                          <td>{$vo.createtime}</td>
+		                          <td>
+		                          		<button type="button" href="#myModal" data-toggle="modal" class="btn btn-outline btn-success" onclick="updateproxy('{$vo.id}','{$vo.phonenum}')">开通代理</button>
+		                          		<button type="button" href="#myModal-1" data-toggle="modal" class="btn btn-outline btn-danger" onclick="modifydaili('{$vo.id}')">拒绝开通</button>
+		                          </td>
+		                      </tr>
+		                    </volist> 
+		                  </tbody>
+		              </table>
+		              <div	class="fenye">
+				     	{$page}
+				     </div>
+		          </div>
+		      </div>
+		  </div>
+		  
+		 
+		  
+		</div>
+		
+	</div>
+		
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" id="myModal" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:780px">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title" style="color:#fff">升级代理</h4>
+            </div>
+            <div class="modal-body">
+			<form class="form-horizontal">
+				<input type="hidden" id="dailiid" name="dailiid">
+               	<div class="form-group">
+                   <label for="inputPassword1" class="col-lg-3 control-label">代理手机号</label>
+                   <div class="col-lg-8">
+                       <input type="text" class="form-control" id="phonenum"  name="phonenum" readOnly="true">
+                   </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+               	</div>
+               	<div class="form-group">
+                   <label for="inputPassword1" class="col-lg-3 control-label">登陆密码</label>
+                   <div class="col-lg-8">
+                       <input type="text" class="form-control" id="password"  name="password">
+                   </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+               	</div>
+               	<div class="form-group">
+                   <label for="inputPassword1" class="col-lg-3 control-label">所属分类</label>
+                   <div class="col-lg-8">
+                       <select class="input-sm form-control input-s-sm inline" name="partid" id="partid" style=" height:36px;">
+	                            <option value="0">请选择分类</option>
+	                            <volist name="partlist" id="vo">
+	                            <option value="{$vo.id}">{$vo.partname}</option>
+	                            </volist>
+	                        </select>
+                   </div><!--  <span class="col-lg-1" style="color:red;line-height:34px">*</span>-->
+               	</div>
+               	<div class="form-group">
+                   <label for="inputPassword1" class="col-lg-3 control-label">所属推广位</label>
+                   <div class="col-lg-8">
+                       <select class="input-sm form-control input-s-sm inline" name="adid" id="adid" style=" height:36px;">
+	                            <option value="0">请选择推广位</option>
+	                            <volist name="adlist" id="vo">
+	                            <option value="{$vo.id}">{$vo.adname}</option>
+	                            </volist>
+	                        </select>
+                   </div><!--<span class="col-lg-1" style="color:red;line-height:34px">*</span>-->
+               	</div>
+              	<div class="form-group">
+                   <div class="col-lg-offset-3 col-lg-10">
+                       <button type="button" class="btn btn-success" id="adddaili" onclick="save()">提交</button>
+                   </div>
+               	</div>
+             </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--时间插件-->
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/select/dist/js/bootstrap-select.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script src="./Public/js/select2.full.min.js"></script>
+<script src="./Public/js/zh-CN.js"></script>
+<script>
+$(function(){
+	laydate.skin('molv');
+	laydate({
+		  elem: '#starttime',
+		  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		});
+	laydate({
+		  elem: '#endtime',
+		  format: 'YYYY-MM-DD', // 分隔符可以任意定义，该例子表示只显示年月
+		  festival: true, //显示节日
+		});
+	
+});
+	
+
+	
+
+function save(){
+	$id = $("#dailiid").val();
+	$phonenum = $("#phonenum").val();
+	$password = $("#password").val();
+	$partid= $("#partid").val();
+	$adid = $("#adid").val();
+	if($phonenum !="" && $password != ""){
+		$.ajax({
+			type:"post",
+			url:"?s=Proxy/adddaili",
+			data:{"id":$id,"phonenum":$phonenum,"password":$password,"partid":$partid,"adid":$adid},
+			dataType : "json",			
+			success : function(data){
+				if (data['msg'] == 1) {
+					layer.msg('操作成功',{time:1000},function(){
+						window.location.reload();	
+					});
+				} else {
+					layer.msg('操作失败',{time:1000});
+				}
+			}
+		});
+	}else{
+		layer.msg('请填写相关数据',{time:1000});
+	}
+}
+
+function updateproxy(id,phonenum){
+	$("#dailiid").val(id);
+	$("#phonenum").val(phonenum);
+}
+
+function modifydaili(id){
+	if (!confirm("确定拒绝开通?")) {
+        return;
+    }
+	$.ajax({
+		type:"post",
+		url:"?s=Proxy/invalidproxy",
+		data:{"id":id},
+		dataType : "json",			
+		success : function(data){
+			if (data['msg'] == 1) {
+				layer.msg('操作成功',{time:1000},function(){
+					window.location.reload();	
+				});
+			} else {
+				layer.msg('操作失败',{time:1000});
+			}
+		}
+	});
+}
+</script>
+
+</body>
+</html>

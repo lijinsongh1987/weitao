@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/news.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+
+
+
+
+</style>
+</head>
+
+<body>
+
+	<!-- <header id="search-box">
+		<a id="search">搜索优惠券</a>
+		<a id="news"></a>
+	</header> -->
+	
+	<section id="conten">
+		
+		<div id="news-list-box">
+			<volist name="news" id="vo">
+				<div class="list-box" onclick="news('{$vo.id}');">
+					<div class="text-box">
+						<h2>{$vo.title}</h2>
+						<p>{$vo.time}</p>
+					</div>
+					<img src="{$vo.picimage}">
+				</div>
+			</volist>
+		</div>
+		
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+
+<script>
+		
+		
+</script>
+    
+</html>

@@ -1,0 +1,15 @@
+function dologin(nickname,imageurl,openid){
+	$.ajax({
+		type:"post",
+		url:"?s=Api/savetbuser",
+		data:{'id':id,'dtitle':dtitle,'typeid':typeid,'pic':pic,'orgprice':orgprice,'salesnum':salesnum,'sellerid':sellerid,'isTmall':isTmall,'saleFlag':saleFlag,'couponFlag':couponFlag,'quanid':quanid,'quanprice':quanprice,'Commission_jihua':Commission_jihua,'Commission_queqiao':Commission_queqiao},
+		dataType : "json",			
+		success : function(data){
+			if(data['msg'] == 1){
+				localStorage.setItem("nickname",nickname);
+         		localStorage.setItem("imageurl",imageurl);
+         		localStorage.setItem("openid",openid);
+			}
+		}
+	});
+}

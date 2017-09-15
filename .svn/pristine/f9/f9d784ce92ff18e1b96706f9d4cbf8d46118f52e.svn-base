@@ -1,0 +1,10 @@
+<?php
+
+class PersnoalAction extends Action{
+    public function persnoal(){
+        $this->display();       
+    }
+   
+}
+
+?>

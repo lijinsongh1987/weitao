@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<script src="./Public/login/login.js"></script>
+<style type="text/css">
+
+#conten{
+	padding: 0.3125rem;
+}
+.message-box{
+	background: #fff;
+	padding: 0.3125rem;
+	border-radius: 3px;
+	margin-bottom: 0.3125rem;
+	display: -webkit-flex;
+	position: relative;
+}
+.message-box h2{
+	font-size: 16px;
+	color: #414141;
+	min-height:2em;
+}
+.message-box p{
+	font-size: 12px;
+	color: #999;
+	margin-top: 10px;
+}
+.text-box{
+	flex:1;
+}
+.message-box .button{
+	display:block;
+	width:6em;
+	line-height: 2.4em;
+	height:2.4em;
+	background: #ff6b0e;
+	color:#fff;
+	text-align:center;
+	border-radius: 4px;
+	position: absolute;
+	bottom:10px;
+	right:10px;
+}
+</style>
+</head>
+
+<body>
+
+	
+	<section id="conten">
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+<script>
+$(function(){
+	var openid = localStorage.getItem("openid");
+	$.ajax({
+		type:"post",
+		url:"?s=Persnoal/getpaymoneymessage",
+		data:{'openid':openid},
+		dataType : "json",			
+		success : function(data){
+			//layer.msg(data['sql'],{time:80000});
+			if (data) {
+				var result = "";
+				for (var i = 0; i < data.length;i++) {
+					result += '<div class="message-box">'+
+									'<div class="text-box">'+
+										'<h2>'+data[i]['content']+'</h2>'+
+										'<p>'+data[i]['createtime']+'</p>'+
+									'</div>'+
+									'<a class="button">'+'立即领取'+'</a>'+
+								'</div>';
+				}
+				$("#conten").html(result);
+			}
+		}
+	});
+});
+</script>
+
+    
+</html>

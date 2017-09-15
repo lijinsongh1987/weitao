@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<script src="./Public/login/login.js"></script>
+<style type="text/css">
+
+body{
+	background: #fff;
+}
+p{
+	font-size: 16px;
+	color:#3e3e3e;
+	line-height: 1.7;
+	margin: 10px 0 10px 0 ;
+	text-align: justify;
+}
+img{
+	width:100%;
+}
+.detail{
+	padding: 0.3125rem;
+	}
+.item{
+	display: flex;
+	padding: 10px;
+	background: #f3f3f3;
+	color:#414141;
+}
+.item:hover{
+color:#414141;
+text-decoration: none;
+}
+.item .item-pic{
+	flex:2;
+	margin-right: 10px;
+}
+.item .item-info{
+	flex:5;
+	position: relative;
+}
+.item-info .item-title{
+ 	font-size: 14px;
+ 	text-align: justify;
+	display: -webkit-box !important;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break:break-all;
+	-webkit-box-orient:vertical;
+	-webkit-line-clamp:2;
+	color: #747474;
+ }
+.item-info .item-price{
+	position:absolute;
+	bottom: 10px; 
+ }
+.item-price .price-new{
+	color: #f50;
+}
+.price-new strong{
+	font-size: 16px;
+ 	font-weight: 800
+}
+.item-info .item-btn{
+	position:absolute;
+	right:0;
+    bottom: 5px;
+    width: 6em;
+    line-height: 2.4em;
+    border: 1px solid #f50;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    color: #f50;
+    text-align: center;
+}
+
+.item-pic img{
+	width:100%;
+}
+.detail-title{
+	font-size: 18px;
+}
+.detail-time{
+	font-size: 14px;
+	color: #969696;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+</style>
+</head>
+	<body>
+  		<div class="detail">
+  			{$newslist}
+  		</div>
+  		
+  		
+	</body>
+</html>

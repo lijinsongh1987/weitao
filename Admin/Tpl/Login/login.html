@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>聚点微淘运营管理系统用户登录</title>
+	<link rel="stylesheet" href="./Public/css/base.css" />
+	<link rel="stylesheet" href="./Public/css/login.css" />
+	<style>
+	
+	.loginbtn{width: 102px;
+	    height: 42px;
+	    color: #fff;
+	    font-size: 16px;
+	    border-radius: 2px;
+	}
+	</style>
+</head>
+<body>
+<div class="superloginA"></div>
+<div class="loginBox">
+	<div class="logo"><img src="./Public/images/logo_login.png"/></div>
+	<div class="loginMain">
+		<div class="tabwrap">
+		<form action="{:U('Login/dologin')}" method="post" class="panel-body">
+		<table border="0" cellspacing="0" cellpadding="0">
+			<tr><td class="title">用户名：</td><td><input type="text" class="form-control txt" name="username" id="username"/></td></tr>
+			<tr><td class="title">密   码：</td><td><input type="password" class="form-control txt" name="password" id="password"/></td></tr>		
+			<tr><td>&nbsp;</td><td><input type="submit" class="loginbtn" value="登录" /></td></tr>	
+		</table>
+		</form>
+		</div>
+	</div>
+</div>
+</body>
+<script type="text/javascript" src="./Public/js/jquery.min.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script>
+$usermsg = "{$_SESSION['usermsg']}";
+if($usermsg){
+	layer.msg($usermsg);
+	<?php unset($_SESSION['usermsg']);?>
+}
+
+</script>
+
+</html>

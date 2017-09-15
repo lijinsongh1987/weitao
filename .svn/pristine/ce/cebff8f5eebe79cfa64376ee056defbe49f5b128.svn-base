@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/persnoal.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+
+
+
+
+</style>
+</head>
+
+<body>
+
+	<header id="ps-inf-box">
+		<img src="./Public/Home/img/avatar.png">
+		<div class="inf">
+			<p>社会主义接班人</p>
+			<p>ID:0000001</p>
+		</div>
+		<a href="#" class="set-up"><img src="./Public/Home/img/setup.png"></a>	
+	</header>
+	
+	<section id="conten">
+		<div id="money-box">
+			<div class="money">
+				<h2>5858.25</h2>
+				<p>余额</p>
+			</div>
+			<p class="xian"></p>
+			<div class="money">
+				<h2>5858.25</h2>
+				<p>预估收入</p>
+			</div>
+		</div>
+		
+		<div id="icon-box">
+			<div class="icon-box">
+				<a href="#" class="icon">
+					<img src="./Public/Home/img/message.png">
+					<span>消息</span>
+				</a>
+				<p class="vertical-line"></p>
+				<a href="#" class="icon">
+					<img src="./Public/Home/img/message.png">
+					<span>我要开店</span>
+				</a>
+				<p class="vertical-line"></p>
+				<a href="#" class="icon">
+					<img src="./Public/Home/img/message.png">
+					<span>我的伙伴</span>
+				</a>
+			</div>
+			<p class="horizontal-line"></p>
+			<div class="icon-box">
+				<a href="#" class="icon">
+					<img src="./Public/Home/img/message.png">
+					<span>新手课堂</span>
+				</a>
+				<p class="vertical-line"></p>
+				<a href="#" class="icon">
+					<img src="./Public/Home/img/message.png">
+					<span>分享赚钱</span>
+				</a>
+				<p class="vertical-line"></p>
+				<a href="#" class="icon">
+					<img src="./Public/Home/img/message.png">
+					<span>邀请好友</span>
+				</a>
+			</div>
+		</div>
+		
+		
+		<div id="other-box">
+			<a class="other-box">
+				<img class="other-icon" src="./Public/Home/img/withdraw.png">
+				<span>余额提现</span>
+				<img class="more" src="./Public/Home/img/more.png">
+			</a>
+			<a class="other-box">
+				<img class="other-icon" src="./Public/Home/img/withdraw.png">
+				<span>新手礼包</span>
+				<img class="more" src="./Public/Home/img/more.png">
+			</a>
+			<a class="other-box">
+				<img class="other-icon" src="./Public/Home/img/withdraw.png">
+				<span>帮助与反馈</span>
+				<img class="more" src="./Public/Home/img/more.png">
+			</a>
+		</div>	
+		
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+
+<script>
+		
+		
+    </script>
+    
+</html>

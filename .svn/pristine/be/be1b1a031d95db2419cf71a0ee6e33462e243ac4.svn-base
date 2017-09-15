@@ -1,0 +1,10 @@
+<?php
+
+class NewsAction extends Action{
+    public function news(){
+        $this->display();       
+    }
+   
+}
+
+?>

@@ -1,0 +1,37 @@
+<?php
+
+class LoginAction extends Action{
+    public function login(){
+        
+        $this->display();       
+    }
+    
+    public function insertuserinfo(){
+    	$data['nickname'] = $_GET['nickname'];
+    	$data['imageurl'] = $_GET['imageurl'];
+    	$data['openid'] = $_GET['openid'];
+    	$data['leadid'] = $_GET['leadid'];
+    	$data['createtime'] = date("Y-m-d H:i:s");
+    	$list = M("weixinuser")->where("openid = '".$_GET['openid']."'")->select();
+    	
+    	if (!$list) {
+    		M("weixinuser")->add($data);
+    		//���һ��5Ԫ���
+    		$data2['tid'] = 2;
+    		$data2['createtime'] = date("Y-m-d H:i:s");
+    		$data2['status'] = 0;
+    		$data2['openid'] = $_GET['openid'];
+    		$data2['faildate'] = 0;
+    		M("redbag")->add($data2);
+    		//�������û����һ��������
+    		$user = M("weixinuser")->where("openid = '".$_GET['leadid']."'")->select();
+    		$data3['yaoqingnumber'] = $user[0]['yaoqingnumber'] + 1;
+    		$data3['id'] = $user[0]['id'];
+    		M("weixinuser")->save($data3);
+    		
+    	}
+    }
+   
+}
+
+?>

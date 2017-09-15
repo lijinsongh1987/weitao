@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/coupon.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/swiper.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+html{
+	background-color: #f3f3f3;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- <header id="search-box">
+		<a id="search">搜索优惠券</a>
+		<a id="news"></a>
+	</header> -->
+	
+	<section id="conten">
+		
+		<div class="tabs">
+			<a href="#" class="active">全部</a>
+			<a href="#">未使用</a>
+			<a href="#">已使用</a>
+			<a href="#">已失效</a>
+		</div>
+	  	<div id="tabs-container" class="swiper-container">
+		    
+	  	</div>
+
+		<div class="pop-box">
+			<div class="pop">
+				<h1>使用红包</h1>
+				<form action="">
+					<input type="text" placeholder="输入订单号" class="order-number">
+					<button type="submit" class="submit-button">确定</button>
+				</form>
+				<a class="quxiao">取消</a>
+			</div>
+		</div>
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+
+<script>
+function available(id){
+	$(".pop-box").fadeIn(500);
+};
+$(function(){
+	var openid = localStorage.getItem("openid");
+	$.ajax({
+		type:"post",
+		url:"?s=Persnoal/getredbag",
+		data:{'openid':openid},
+		dataType : "json",			
+		success : function(data){
+			if (data) {
+				var result= "";
+				var str = "";
+				var strone = "";
+				for(var i = 0;i < data.length;i++) {
+					if (data[i]['faildate'] == 0) {
+						str = "永久有效";
+					} else {
+						str = "有效期至"+data[i]['faildate'];
+					}
+					if (data[i]['status'] == 0) {
+						if (data[i]['shixiao'] == 0) {
+							strone = "";
+						} else if (data[i]['shixiao'] == 1) {
+							strone = '<img class="used-img" src="./Public/Home/img/used-img.png">';
+						}
+					} else if (data[i]['status'] == 1) {
+						strone = '<img class="used-img" src="./Public/Home/img/expired-img.png">';
+					}
+					result += '<div class="swiper-wrapper">'+
+				      '<div class="swiper-slide">'+
+					        '<div class="coupon-box">'+
+					        	'<img src="./Public/Home/img/coupon-box-gb.png">'+
+					        	'<div class="coupon">'+
+					        		'<div class="text-box">'+
+					        			'<h2 class="type">'+data[i]['typename']+'</h2>'+
+					        			'<p class="use">单笔订单超过'+data[i]['condition']+'元可用</p>'+
+					        				'<p class="time">'+str+'</p>'+
+					        		'</div>'+
+					        		'<h1 class="moeny">￥<strong>'+data[i]['price']+'</strong></h1>'+
+					        				'<button type="button" class="click-button" onclick="available("'+data[i]['id']+'");">点击使用</button>'+
+					        			strone+
+					        	'</div>'+
+					        '</div>'+
+				      '</div>'+
+				    '</div>';
+				}
+				$("#tabs-container").html(result);
+			}
+			
+		}
+	});
+});
+window.onload = function() {
+	$(".quxiao").click(function(){
+		$(".pop-box").fadeOut(500);
+	})
+	
+	var tabsSwiper = new Swiper('#tabs-container',{
+	    speed:500,
+	    onSlideChangeStart: function(){
+	      $(".tabs .active").removeClass('active')
+	      $(".tabs a").eq(tabsSwiper.activeIndex).addClass('active')  
+	    }
+	  })
+	  $(".tabs a").on('touchstart mousedown',function(e){
+	    e.preventDefault()
+	    $(".tabs .active").removeClass('active')
+	    $(this).addClass('active')
+	    tabsSwiper.slideTo( $(this).index() )
+	  })
+	  $(".tabs a").click(function(e){
+	    e.preventDefault()
+	  })
+	}
+</script>
+    
+</html>

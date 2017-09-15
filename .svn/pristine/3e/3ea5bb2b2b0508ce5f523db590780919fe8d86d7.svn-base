@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<script src="./Public/login/login.js"></script>
+<style type="text/css">
+	
+	#conten{
+	padding-top: 0.6rem;
+	}
+	.aiplay-img{
+		width:20%;
+		margin: 0 auto;
+		margin-bottom: 0.6rem;
+	}
+	.form-box{
+		background: #fff;
+		padding-left: 0.3125rem;
+		padding-bottom: 0.5rem;
+	}
+	.form-box .input-box{
+		display: -webkit-flex;
+		padding: 0.5rem 0 0.5rem 0;
+	}
+	.form-box .moeny{
+		margin-top: 0.5rem;
+		color: #999999;
+		font-size: 14px;
+	}
+	.form-box .moeny span{
+		color: #ff5c05;
+	}
+	.input-box p{
+		width:6em;
+		font-size: 14px;
+		line-height: 16px;
+		color: #666;
+	}
+	.input-box input{
+		line-height: 16px;
+		font-size: 14px;
+		flex:1;
+		border:none;
+	}
+	:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #c7c7cd; 
+	}
+	
+	::-moz-placeholder { /* Mozilla Firefox 19+ */
+	    color: #c7c7cd;
+	}
+	
+	input:-ms-input-placeholder{
+	    color: #c7c7cd;
+	}
+	
+	input::-webkit-input-placeholder{
+	    color: #c7c7cd;
+	}
+	.submit-box{
+		padding: 0 0.3125rem;
+	}
+	.submit-box .submit{
+		background: #24a5ff;
+		border: none;
+		color: #fff;
+		width:100%;
+		font-size: 16px;
+		line-height: 3em;
+		border-radius: 6px;
+		margin-top: 0.5rem;
+	}
+	.submit-box p{
+		text-align: center;
+		font-size: 14px;
+		color: #999;
+		margin-top: 10px;
+	}
+	.submit-box p strong {
+		color: #ff5c05;
+	}
+</style>
+</head>
+
+<body>
+
+	<!-- <header id="search-box">
+		<a id="search">搜索优惠券</a>
+		<a id="news"></a>
+	</header> -->
+	
+	<section id="conten">
+		<img class="aiplay-img" src="./Public/Home/img/aiplay.png">
+		<input type="hidden" name="openid" id="openid"/>
+		<div id="formbox">
+			<div class="form-box" >
+				<div class="input-box">
+					<p>支付宝账号</p>
+					<input type="text" placeholder="填写您的支付宝账号" id="alipay">
+				</div>
+				<hr>
+				<div class="input-box">
+					<p>姓名</p>
+					<input type="text" placeholder="填写您的支付宝认证姓名" id="realname">
+				</div>
+				<hr>
+				<div class="input-box">
+					<p>提现金额</p>
+					<input type="text" placeholder="提现金额最低50元" id="tixian">
+				</div>
+				<hr>
+				<h2 class="moeny">可用金额：<span id="yue">0</span></h2>
+			</div>
+			<div style="color:red;" id="errormessage"></div>
+			<div class="submit-box">
+				<button type="submit" class="submit" id="submit">提交申请</button>
+				<p><strong>提示：</strong>最低提现金额为<strong>50元</strong></p>
+			</div>
+			</div>
+			<div id="tixiansuccess" style="display:none;color:red;text-align:center;font-size:40px;margin-top:100px;">提交成功</div>
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+<script>
+$(function(){
+	var openid = localStorage.getItem("openid");
+	$("#openid").val(openid);
+	$.ajax({
+		type:"post",
+		url:"?s=Persnoal/getyueinfo",
+		data:{'openid':openid},
+		dataType : "json",			
+		success : function(data){
+			//layer.msg(data['sql'],{time:80000});
+			if (data[0]['yue']) {
+				$("#yue").html(data[0]['yue']);
+			}
+		}
+	});
+});
+$("#submit").click(function(){
+	var openid = $("#openid").val();
+	var tixian = $("#tixian").val();
+	var alipay = $("#alipay").val();
+	var realname = $("#realname").val();
+	var str = $("#yue").html();
+	if (tixian > 0 && alipay != "" && realname != "") {
+		if (tixian > str) {
+			$("#errormessage").html("提现金额不能大于余额");
+		} else {
+			$.ajax({
+				type:"post",
+				url:"?s=Persnoal/addtixian",
+				data:{'openid':openid,'tixian':tixian,'alipay':alipay,'realname':realname},
+				dataType : "json",			
+				success : function(data){
+					//layer.msg(data['sql'],{time:80000});
+					if(data['msg'] == 1){
+						//提交成功操作
+						$("#formbox").css("display","none");
+						$("#tixiansuccess").css("display","block");
+					}else if(data['msg'] == 2){
+						layer.msg('操作失败',{time:800});
+					}
+				}
+			});
+		}
+	} else {
+		$("#errormessage").html("请填写正确的支付宝相关信息，否则将不能打款！");
+	}
+});
+</script>
+    
+</html>

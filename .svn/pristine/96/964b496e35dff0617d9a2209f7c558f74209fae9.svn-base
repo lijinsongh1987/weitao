@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/dropload.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/index.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/swiper.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<script src="./Public/Home/js/dropload.min.js"></script>
+<script src="./Public/login/login.js"></script>
+<style type="text/css">
+
+#conten{
+	padding: 0.3125rem;
+}
+.message-box{
+	background: #fff;
+	padding: 0.3125rem;
+	border-radius: 3px;
+	margin-bottom: 0.3125rem;
+}
+.message-box h2{
+	font-size: 16px;
+	color: #414141;
+}
+.message-box p{
+	font-size: 12px;
+	color: #999;
+	margin-top: 10px;
+}
+.message-box h2 span{
+	color:red;
+}
+.message-box p span{
+	color:green
+}
+</style>
+</head>
+
+<body>
+
+	
+	<section id="conten" class="content">
+		<div class="list">
+		
+		</div>
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+<script>
+	$(function(){
+	    var counter = 0;
+	    // 每页展示4个
+	    var num = 20;
+	    var pageStart = 0,pageEnd = 0;
+	    var openid = localStorage.getItem("openid");
+	    //var openid = "o6vyL0_DwhNtOsO7OVMMjO1pkEaE";
+	    // dropload
+	    $('.content').dropload({
+	        scrollArea : window,
+	        domDown : {
+	            domClass   : 'dropload-down',
+	            domRefresh : '<div class="dropload-refresh">↑上拉加载更多-自定义内容</div>',
+	            domLoad    : '<div class="dropload-load"><span class="loading"></span>正在加载数据...</div>',
+	            domNoData  : '<div class="dropload-noData">已加载完成</div>'
+	        },
+	        loadDownFn : function(me){
+	        	
+	        	
+	        	//alert(counter);
+	            $.ajax({
+	                type: 'POST',
+	                url: '?s=Persnoal/getpayrecord',
+	               	data:{'counter':counter,'openid':openid},
+	                dataType: 'json',
+	                success: function(data){
+	                	
+	                    var result = '';
+	                    for(var i = 0; i < data.length; i++){
+	                    	var str = "";
+	                    	if (data[i]['status'] == 0) {
+	                    		str = "打款中";
+	                    	} else if (data[i]['status'] == 1) {
+	                    		str = "已打款";
+	                    	} else if (data[i]['status'] == 2) {
+	                    		str = "已退款";
+	                    	}
+		                	result +=   "<div class='message-box'>"+
+								"<h2>提现金额：<span>"+data[i]['tixian']+"</span></h2>"+
+								"<p>"+data[i]['time']+"&nbsp;&nbsp;状态：<span>"+str+"</span></p>"+
+								"</div>";
+	                    }
+	                    if(data.length < 20){
+	                		//alert(data.length);
+                            // 锁定
+                            me.lock();
+                            // 无数据
+                            me.noData();
+                        }
+	                    // 为了测试，延迟1秒加载
+	                    setTimeout(function(){
+	                        $('.list').append(result);
+	                        // 每次数据加载完，必须重置
+	                        me.resetload();
+	                    },1000);
+	                },
+	                error: function(xhr, type){
+	                    alert('加载错误');
+	                    // 即使加载出错，也得重置
+	                    me.resetload();
+	                }
+	            });
+	            counter++;
+	        },
+	        threshold : 50
+	    });
+	});
+
+</script>
+
+    
+</html>

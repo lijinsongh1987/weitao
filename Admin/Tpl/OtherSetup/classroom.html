@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>聚点微淘运营管理系统</title>
+<link rel="stylesheet" href="./Public/css/base.css">
+<link rel="stylesheet" href="./Public/css/page.css">
+<include file="Public:common"/>
+<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+<link href="./Public/css/flat/style.css" rel="stylesheet">
+<link href="./Public/css/frame/style.css" rel="stylesheet">
+<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+<link rel="stylesheet" href="./Public/css/fenye.css" />
+<link rel="stylesheet" href="./Public/admin/editor/css/froala_editor.min.css" />
+<link rel="stylesheet" href="./Public/admin/editor/css/font-awesome.min.css" />
+<style>
+	#boxposition{
+	position:relative
+	}
+	.modifybox{
+	position:absolute;
+	z-index:99;
+	top:0;
+	width:100%;
+	display:none
+	}
+</style>
+</head>
+
+<body style="background:#f1f2f7">
+<div class="superWrap clearfix">
+	<!-- 侧边栏-->
+	<include file="Public:left"/>
+	<div class="superContent">
+		<!-- 头部-->
+		<div class="super-header super-header2">
+			<include file="Public:header"/>
+		</div>
+		<!-- 内容 -->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+		
+			<div class="col-lg-12" style="margin-top:20px;" id="boxposition">
+			
+				<div class="ibox float-e-margins" id="zhanshibox">
+					<div class="ibox-title" style="overflow:hidden">
+		              <h5 style="line-height:36px;">知识课堂文案设置</h5>
+		              <a href="?s=OtherSetup/addconten" data-toggle="modal" class="btn btn-success"  id="submit-btn" onclick="checkclear();" style="width:6em; float:left; line-height:24px;margin-left:10px;">文章添加</a>
+		          	</div>
+		          	
+		          	  <div class="ibox-content">
+		          	  	<form action="" method="get" style="background:#fff">
+			          	<input type="hidden" name="s" value="OtherSetup/classroom"/> 
+						<div class="row">
+							 
+			          	  </div>
+		          	  </form>
+		          		<table class="table table-hover table-bordered">
+		                  <thead>
+		                      <tr>
+		                      	<th style="text-align:center;vertical-align:middle;">编号</th>
+		                      	<th style="text-align:center;vertical-align:middle;">发布者</th>
+		                      	<th style="text-align:center;vertical-align:middle;">文章栏目</th>
+		                          <th style="text-align:center;vertical-align:middle;">文章标题</th>
+		                          <th style="text-align:center;vertical-align:middle;">封面图片</th>
+		                          <th style="text-align:center;vertical-align:middle;">发布时间</th>
+		                          <th style="text-align:center;vertical-align:middle;">操作</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  <volist name="list" id="vo" class="row">
+	                      	<tr>
+	                      			<td class="col-lg-1 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.id}</td>
+	                      			<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.realname}</td>
+		                          	<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.typename}</td>
+		                          	<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.title}</td>
+		                          	<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;"><img src="{$vo.imgurl}" onclick='tip(this)' data="{$vo.imgurl}" style="width:30px;height:30px;"/></td>
+		                          	<td class="col-lg-2 text-navy" id="datatime" style="text-align:center;vertical-align:middle;">{$vo.time}</td>
+		                          	<td class="col-lg-2" style="text-align:center;">
+		                          		<a  href="?s=OtherSetup/addconten/id/{$vo.id}" class="btn btn-outline btn-primary" >修改</a>
+		                          		<button  type="button" class="btn btn-outline btn-danger" onclick='del("{$vo.id}")'>删除</button>
+		                          	</td>
+		                      </tr>
+		                      </volist>
+		                  </tbody>
+		              </table>
+		          		<div	class="fenye">
+				     	{$page}
+				     </div>
+		          	</div>
+				</div>
+					
+				</div>
+				
+			</div>
+		  
+		 
+		  
+		</div>
+		
+	</div>
+		
+
+
+
+<!--时间插件-->
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+
+
+
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="./Public/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+
+
+function tip(obj){
+	 var image  = $(obj).attr('data');
+	 $index = layer.tips('<img style="width:300px; height:300px;" src="'+image+'"/>', obj,{area:['320px','310px'],tips:[2,'#FAFAFA']}); 
+}
+
+function del(id){
+	if (!confirm("确认删除?")) {
+        return;
+    }
+	$.getJSON("?s=OtherSetup/delclassroom",{'id':id},function(data){
+		if (data) {
+			if(data['msg'] == 1){
+				layer.msg('删除成功',{time:800},function(){
+					location.reload(true);
+				});
+			}else{
+				layer.msg('删除失败！',{time:800});
+			}
+		}
+	});
+}
+</script>
+
+</body>
+</html>

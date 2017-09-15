@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>加入我们</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/index.css">
+<script src="./Public/Home/js/jquery.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style>
+
+
+</style>
+</head>
+
+<body>
+	
+    
+    <div class="popbox" id="goumai" style="display:block;">
+    	<div class="popconten" style="padding-bottom:20px;">
+            <!-- <img src="./Public/Home/images/order.png" class="orderimg"> -->
+            <p style="margin:0 auto; width:80%;font-size:16px;color:#646464;margin-top:20px;text-align:center;">您还不是合伙人，立即加入我们</p>
+            <button id="ordersubmit" class="inputcss ordersubmit" onclick="tiaozhuan()">确定</button>
+        </div>
+    </div>
+   
+</body>
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+
+<script>
+function tiaozhuan(){
+	window.location.href="?s=Personal/joinus"; 
+}
+
+
+
+
+</script> 
+</html>

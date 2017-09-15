@@ -1,0 +1,135 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>淘宝客</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/index.css">
+<script src="./Public/Home/js/jquery-1.11.2.min.js"></script>
+<script src="./Public/Home/js/swiper.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+<style type="text/css">
+
+
+
+.swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #fff;
+    opacity: 1;
+}
+.swiper-pagination-bullet-active {
+    opacity: 1;
+    background: #ff6b0e;
+}
+</style>
+</head>
+
+<body>
+
+	<!-- <header id="search-box">
+		<a id="search">搜索优惠券</a>
+		<a id="news"></a>
+	</header> -->
+	
+	<section id="conten">
+		<div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><a class="bannerbox" href="#"><img src="./Public/Home/img/banner-01.png"></a></div>
+                <div class="swiper-slide"><a class="bannerbox" href="#"><img src="./Public/Home/img/banner-01.png"></a></div>
+                <div class="swiper-slide"><a class="bannerbox" href="#"><img src="./Public/Home/img/banner-01.png"></a></div>
+                <div class="swiper-slide"><a class="bannerbox" href="#"><img src="./Public/Home/img/banner-01.png"></a></div>
+                <div class="swiper-slide"><a class="bannerbox" href="#"><img src="./Public/Home/img/banner-01.png"></a></div>
+            </div>
+            
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+		
+		
+		<div id="icon-box">
+			<a href="?s=Page/page/types/1" class="icon-conten">
+				<img src="./Public/Home/img/youhuiquan.png">
+				<p>优惠券</p>
+			</a>
+			<a href="?s=Page/page/types/2" class="icon-conten">
+				<img src="./Public/Home/img/9.9.png">
+				<p>9块9</p>
+			</a>
+			<a href="?s=Page/page/types/3" class="icon-conten">
+				<img src="./Public/Home/img/jinri.png">
+				<p>今日特惠</p>
+			</a>
+			<a href="#" class="icon-conten">
+				<img src="./Public/Home/img/shareit.png">
+				<p>分享赚钱</p>
+			</a>
+			<a href="#" class="icon-conten">
+				<img src="./Public/Home/img/customer-service.png">
+				<p>在线客服</p>
+			</a>
+		</div>
+		
+		<!-- <div id="news-box">
+			消息板块，预留位置
+		</div> -->
+		
+		
+		<div id="list-box">
+			<h1 class="title">·精选优惠·</h1>
+			<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="list-box">
+					<a href="<?php echo ($vo["Quan_link"]); ?>" class="list">
+						<img class="sp-img" src="<?php echo ($vo["Pic"]); ?>">
+						<div class="text-box">
+							<h2><?php echo ($vo["Title"]); ?></h2>
+							<div class="price-box">
+								<div class="price">
+									<p class="value">￥<strong><?php echo ($vo["Price"]); ?></strong><span>券后价</span></p>
+									<p class="save-money">
+										<img src="./Public/Home/img/sheng.png">
+										<span><?php echo ($vo["Quan_price"]); ?>元</span>
+									</p>
+								</div>
+								<div class="button-box">
+									<p class="button">马上抢购</p>
+								</div>
+							</div>
+						</div>
+					</a>
+					<p class="border"></p>
+				</div><?php endforeach; endif; else: echo "" ;endif; ?>
+		</div>
+		
+
+		
+		
+	</section>
+	
+	<footer>
+	
+	</footer>
+</body>
+
+<script>
+		var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+		pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 30,
+		autoplay: 2000,
+        loop: true
+    	});
+		
+		/* $(function(){
+			$searchHeight = $("#search-box").height();
+			$("#conten").css("margin-top",$searchHeight+30);
+		}) */
+		
+    </script>
+    
+</html>

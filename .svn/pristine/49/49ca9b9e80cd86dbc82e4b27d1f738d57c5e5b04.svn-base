@@ -1,0 +1,71 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>个人中心</title>
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/common.css">
+<link rel="stylesheet" type="text/css" href="./Public/Home/css/personal.css">
+<script src="./Public/Home/js/jquery.min.js"></script>
+<script src="./Public/Home/js/flexible.js"></script>
+
+</head>
+
+<body>
+	<div id="bigbox">
+		<?php if(is_array($personallist)): $i = 0; $__LIST__ = $personallist;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="personalbox">
+	        	<img src="<?php echo ($vo["headimgurl"]); ?>">
+	            <div class="textbox">
+	            	<h4><?php echo ($vo["nickname"]); ?></h4>
+	                <h6>微信号：524843654</h6>
+	            </div>
+	        </div>
+	        
+	        <div class="clickbox">
+	            <div class="clickboxlist">
+	                <a class="floatclick">
+	                    <img src="./Public/Home/images/invite.png">
+	                    <p>已获得<strong style="color:#f82e54"><?php echo ($vo["integral"]); ?></strong>积分</p>
+	                </a>
+	                <a class="floatclick" id="exchange">
+	                    <img src="./Public/Home/images/exchange.png">
+	                    <p>我的兑换码</p>
+	                </a>
+	            </div>
+	            <hr style="border:#f3f3f3 1px solid;">
+	            <p class="rule"><span style="color:#f82e54">规则：</span>成功邀请1个好友关注公众号即可获得<strong style="color:#f82e54"><?php echo ($vo["integralrules"]); ?></strong>积分!</p>
+	        </div>
+        
+	        <a class="order_href" href="?s=Order/order_list/openid/<?php echo ($vo["openid"]); ?>">
+	        	<img src="./Public/Home/images/ordericon.png">
+	            <h4>我的订单</h4>
+	            <img  class="more" src="./Public/Home/images/more.png">
+	        </a>
+	        	        
+        
+    </div>
+    
+    
+    <div class="popbox">
+    	<div class="pop">
+        	<img class="displayimg" src="./Public/Home/images/failure.png">
+            <p class="failure" style="margin-top:1em;">您的兑换码是</p>
+            <p style="margin-top:1em; color:#f82e54;"><strong><?php echo ($vo["redemptioncode"]); ?></strong></p>
+            <a href="?s=Goodslist/index" class="no">立即去兑换商品</a>
+            <button class="cancel" id="cancel" type="button">取消</button>
+        </div>
+    </div><?php endforeach; endif; else: echo "" ;endif; ?>
+</body>
+<script>
+
+$(function(){
+	$("#exchange").click(function(){
+		$(".popbox").fadeIn(500);
+		});
+	$("#cancel").click(function(){
+		$(".popbox").fadeOut(500);
+		});
+	
+	})
+</script>
+</html>

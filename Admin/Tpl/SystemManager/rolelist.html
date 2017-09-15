@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>聚点微淘运营管理系统</title>
+		<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/page.css">
+	<include file="Public:common"/>
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+	
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+		<link rel="stylesheet" href="./Public/table/bootstrap/3.3.4/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	</head>
+
+	<body>
+<div class="superWrap clearfix" style="height: 781px;">
+	<include file="Public:left"/>
+	
+	<!--side E-->
+	<!--content S-->
+	<div class="superContent">
+		<div class="super-header super-header2">
+		<include file="Public:header"/>
+		</div>	
+		<!--header-->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7;">
+		          <div class="ibox-title">
+		              <h5>角色基本信息表</h5>
+		          </div>
+		          <div class="ibox-content">
+		          	  <div class="row">
+		          	  <div class="col-sm-1" style="margin:10px 0px 10px 0px;">
+			        <a href="#myModal-1" data-toggle="modal" class="btn btn-sm btn-success" style=" height:36px; width:6em;line-height:24px;margin-left:10px;">添加角色 </a>
+			     </div>
+		          	  </div>
+		              <table class="table table-hover table-bordered" style="margin-top:20px;">
+		                  <thead>
+		                      <tr>
+		                          <th style="text-align:center;">编号</th>
+		                          <th style="text-align:center;">名称</th>
+		                          <th style="text-align:center;">创建时间</th>
+		                          <th style="text-align:center;">操作</th>
+		                      </tr>
+		                  </thead>
+		                  <tbody>
+		                  <volist name="list" id="vo">
+		                      <tr>
+		                          <td style="text-align:center;">{$vo.id}</td>
+		                          <td style="text-align:center;">{$vo.rolename}</td>
+		                          <td style="text-align:center;">{$vo.createtime}</td>
+		                          <td style="text-align:center;"><a href="#myModal-1" data-toggle="modal" mce_href="" onclick="editrole('{$vo.id}','{$vo.rolename}')">编辑</a>
+		                          <a href="javascript:void(0);" onclick="delrole({$vo.id});">删除</a>
+		                          <a href="#myModal-2" data-toggle="modal" mce_href="" onclick="addaccess('{$vo.id}','{$vo.mid}')">权限编辑</a></td>
+		                      </tr>
+		                      </volist>
+		                  </tbody>
+		              </table>
+		          </div>
+		</div>
+		<!--main-->
+	</div>
+	<!--content E-->
+</div>
+
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-1" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:480px">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">添加新角色</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal">
+                	<input type="hidden" id="id" name="id">
+                    <div class="form-group">
+                        <label for="inputPassword1" class="col-lg-3 control-label">角色名</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" id="rolename"  name="rolename">
+                        </div><span class="col-lg-1" style="color:red;line-height:34px">*</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-offset-3 col-lg-10">
+                            <button type="button" class="btn btn-success" id="submit-btn">提交</button>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+			
+        </div>
+    </div>
+</div>
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal-2" class="modal fade" style="display: none;">
+    <div class="modal-dialog" style="margin-top:10%; width:400px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#1c84c6">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title" style="color:#fff">添加权限</h4>
+            </div>
+            <div class="modal-body">
+				<form class="form-horizontal">
+                	<input type="hidden" id="aid" name="aid">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                        	<volist name="menulist" id="i" key="i">
+                        		<div>
+                        			<div style="background-color:#3782c6;width:370px;line-height:30px;heigth:30px;">
+	                        			<label style="padding-left:20px;line-height:30px;height:30px; margin:0;color:#fff">{$i.name}</label>
+	                        			<input type="checkbox" onclick="SelXmSubs(this);" value="{$i.id}" tag="{$i.name}" name="fatheraccess" style="position: absolute;width:14px;height:14px; margin-top:8px; margin-left:6px;">
+                        			</div>
+                        			<div style="width:370px; padding-top:10px;padding-bottom:10px;overflow:hidden">
+	                        			<volist name="i.sonmenu" id="vo" key="j">
+	                        				<div style="overflow:hidden;width:50%; float:left">
+					                        	<label style="padding-left:20px;line-height:30px;height:30px; margin:0">{$vo.name}</label>
+					                            <input type="checkbox" value="{$vo.id}" name="access" tag="{$vo.name}" xm="{$i.name}" style="position: absolute;width:14px;height:14px; margin-top:8px; margin-left:6px;">
+	                            			</div>
+	                            		</volist>
+	                            	</div>
+                            	</div>
+                            </volist>
+                        </div>
+                        <div class="col-lg-10" style="padding-top:20px;">
+                            <button type="button" class="btn btn-success" id="submit-btnone" style="margin:0 auto">提交</button>
+                        </div>
+                    </div>
+                   </form>
+            </div>
+			
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script>
+function delrole(id){
+	if (!confirm("确认删除?")) {
+           return;
+       }
+	$.ajax({
+		type:"post",
+		url:"?s=SystemManager/delrole",
+		data:{'id':id},
+		dataType : "json",			
+		success : function(data){
+			if(data['msg'] == 1){
+				layer.msg('删除成功',{time:800},function(){
+					location.reload(true);
+				});
+			}else if(data['msg'] == 2){
+				//layer.msg('添加成功',{time:800});
+				layer.msg('删除失败',{time:800});
+			}else if(data['msg'] == 3){
+				//layer.msg('添加成功',{time:800});
+				layer.msg('目前还有用户在使用该角色，请先删除仍在使用该角色的用户，再删除该角色',{time:1800});
+			}
+		}
+	});
+}
+$("#submit-btn").click(function(){
+	var id = $("#id").val();
+	var rolename=$("#rolename").val();
+	if(rolename != ""){
+		$.ajax({
+			type:"post",
+			url:"?s=SystemManager/addrole",
+			data:{'id':id,'rolename':rolename},
+			dataType : "json",			
+			success : function(data){
+				if(data['msg'] == 1){
+					layer.msg('添加成功',{time:800},function(){
+						location.reload(true);
+					});
+				}else if(data['msg'] == 2){
+					//layer.msg('添加成功',{time:800});
+					layer.msg('添加失败',{time:800});
+				}else if(data['msg'] == 3){
+					//layer.msg('添加成功',{time:800});
+					layer.msg('修改成功',{time:800},function(){
+						location.reload(true);
+					});
+				}else if(data['msg'] == 4){
+					//layer.msg('添加成功',{time:800});
+					layer.msg('修改失败',{time:800});
+				}
+			}
+		});
+	}else{
+	 	//layer.msg('请填写相关数据',{time:800});
+	 	layer.msg('请填写相关数据',{time:800});
+	}
+});
+function addaccess (id,mid){
+	$("#aid").val(id);
+	var strs=mid.split(",");
+	for (i=0;i<strs.length ;i++ ) 
+	{ 
+		$("[value='"+strs[i]+"']:even").attr("checked",'true'); //分割后的字符输出 
+	} 
+}
+//项目全选
+   function SelXmSubs(obj) {
+       var xm =  $(obj).attr("tag");
+       var checked = obj.checked;
+
+       $("input[xm='" + xm + "']").each(function (i, n) {
+           n.checked = checked;
+       });
+   }
+$("#submit-btnone").click(function(){
+	var id = $("#aid").val();
+	var access = "";
+	var faccess = "";
+    $('input:checkbox[name=access]:checked').each(function(i){
+       if(0==i){
+    	   access = $(this).val();
+       }else{
+    	   access += (","+$(this).val());
+       }
+    });
+    $('input:checkbox[name=fatheraccess]:checked').each(function(i){
+       if(0==i){
+    	   faccess = $(this).val();
+       }else{
+    	   faccess += (","+$(this).val());
+       }
+    });
+    if ((access != "" && access != 0) && (faccess != "" && faccess != 0)) {
+    	access = access+","+faccess;
+    }
+    if (access != "" && access != 0) {
+    	$.ajax({
+			type:"post",
+			url:"?s=SystemManager/addaccess",
+			data:{'id':id,'access':access},
+			dataType : "json",			
+			success : function(data){
+				if(data['msg'] == 1){
+					layer.msg('权限添加成功',{time:800},function(){
+						location.reload(true);
+					});
+				}else if(data['msg'] == 2){
+					//layer.msg('添加成功',{time:800});
+					layer.msg('权限添加失败',{time:800});
+				}
+			}
+		});
+    } else {
+    	layer.msg('请选择权限',{time:800});
+    }
+});
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superContent').height(winH-headH);
+};
+$(window).resize();
+function editrole(id,rolename){
+	$("#id").val(id);
+	$("#rolename").val(rolename);
+}
+</script>
+</body>
+</html>

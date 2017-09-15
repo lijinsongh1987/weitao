@@ -1,0 +1,11 @@
+<?php
+
+class InviteAction extends Action{
+    public function invite(){
+        $this->display();
+    }
+    
+    
+}
+
+?>

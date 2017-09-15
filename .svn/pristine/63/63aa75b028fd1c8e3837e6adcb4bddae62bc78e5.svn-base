@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class=" js csstransforms3d"><head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>聚点微淘运营管理系统</title>
+	<link rel="stylesheet" href="./Public/css/base.css">
+	<link rel="stylesheet" href="./Public/css/page.css">
+	<include file="Public:common"/>
+	<link href="./Public/css/frame/bootstrap.min.css" rel="stylesheet">
+	<link href="./Public/css/frame/font-awesome.css" rel="stylesheet" />
+	<link href="./Public/css/flat/style.css" rel="stylesheet">
+	
+    <link href="./Public/css/frame/style.css" rel="stylesheet">
+	<link rel="stylesheet" href="./Public/table/bootstrap/3.3.4/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./Public/table/bootstrap-table/css/bootstrap-table.css" />
+</head>
+
+<body>
+<div class="superWrap clearfix" style="height: 781px;">
+	<include file="Public:left"/>
+	<!--side E-->
+	<!--content S-->
+	<div class="superContent">
+	<div class="super-header super-header2">
+	<include file="Public:header"/>
+	</div>	
+		<!--header-->
+		<div class="superCtab superCtabBot" style="background:#f1f2f7">
+		
+			<div class="col-lg-12" style="margin-top:20px;">
+		      <div class="ibox float-e-margins">
+		          <div class="ibox-title">
+		              <h5>淘宝头条文章采集信息</h5>
+		          </div>
+		          <div class="ibox-content">
+		          <form method="get" id="myform">
+		          <input type="hidden" name="s" value="TaoBaoheader/caijishow">
+		          	  <div class="row">
+		          	  	<div class="col-sm-2 m-b-xs" >
+	                      	<select name="headertype" class="form-control" id="headertype"
+											style="height: 36px;">
+								<option value="0" {$_GET['headertype']==0?'selected':''}>请选择采集分类</option>
+								<volist name="headertype" id="vo">
+								<option value="{$vo.columnid}" {$_GET['headertype']==$vo['columnid']?'selected':''}>{$vo.typename}</option>
+								</volist>
+							</select>
+	                    </div>
+	                    <div class="col-sm-2 m-b-xs" >
+	                      	<input placeholder="请输采集页数" class="form-control" type="text"  style=" height:36px;" name="number" id="number" value="{$_GET['number']}">
+	                    </div>
+	                    <div class="col-sm-8">
+		                    <button type="button" onclick="caiji();" class="btn btn-sm btn-primary" style=" height:36px; width:5em">采集</button>
+		                 </div>
+		          	  </div>
+		          	  </form>
+		          </div>
+		      </div>
+		  </div>
+		</div>
+		<!--main-->
+	</div>
+	<!--content E-->
+</div>
+<!--时间插件-->
+<script src="./Public/laydate/laydate.js"></script>
+<script src="./Public/table/jquery/2.1.4/jquery.min.js"></script>
+<script src="./Public/table/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table.js"></script>
+<script src="./Public/table/bootstrap-table/js/bootstrap-table-zh-CN.js"></script>
+<script src="./Public/js/layer/layer.js"></script>
+<script src="./Public/js/common-scripts.js"></script>
+<script>
+window.onresize = function(){
+	var winH=$(window).height();
+	var headH=$('.super-header').height();
+	$('.superWrap').height(winH);
+	$('.superCtabBot').height(winH-headH);
+};
+$(window).resize();
+
+function caiji(){
+	if (!confirm("确定采集?")) {
+        return;
+    }
+	var headertype  = $("#headertype").val();
+	var number = $("#number").val();
+	$("#myform").submit();
+}
+
+</script>
+<script>
+
+</script>
+
+</body></html>
